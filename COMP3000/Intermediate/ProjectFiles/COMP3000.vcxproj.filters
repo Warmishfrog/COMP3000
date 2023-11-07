@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\COMP3000.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{F31BBDD1-B3E8-3BCC-9652-680E16935819}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\COMP3000.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\COMP3000Editor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\.vsconfig" />
+    <Filter Include="Config">
+      <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\COMP3000">
+      <UniqueIdentifier>{010300D6-AAE0-3545-A6C1-933866B67A9F}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\COMP3000\COMP3000.Build.cs">
+      <Filter>Source\COMP3000</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\COMP3000\COMP3000.cpp">
+      <Filter>Source\COMP3000</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\COMP3000\COMP3000.h">
+      <Filter>Source\COMP3000</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\COMP3000\FP_player.cpp">
+      <Filter>Source\COMP3000</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\COMP3000\FP_player.h">
+      <Filter>Source\COMP3000</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\COMP3000\NewGameModeBase.cpp">
+      <Filter>Source\COMP3000</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\COMP3000\NewGameModeBase.h">
+      <Filter>Source\COMP3000</Filter>
+    </ClInclude>
+    <Filter Include="Source\COMP3000\Private">
+      <UniqueIdentifier>{EF6E8E69-5CDA-3604-A324-CB76DA5E8854}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\COMP3000\Private\DiamondSquare.cpp">
+      <Filter>Source\COMP3000\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\COMP3000\Private\LandscapeGen.cpp">
+      <Filter>Source\COMP3000\Private</Filter>
+    </ClCompile>
+    <Filter Include="Source\COMP3000\Public">
+      <UniqueIdentifier>{B84C98E3-8ED6-3D90-97A2-42B49C2BCC3F}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\COMP3000\Public\DiamondSquare.h">
+      <Filter>Source\COMP3000\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\COMP3000\Public\LandscapeGen.h">
+      <Filter>Source\COMP3000\Public</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"E:\\workspace\\comp3000\\COMP3000\\Source\\COMP3000\\COMP3000.Build.cs",
+		"E:\\workspace\\comp3000\\COMP3000\\Source\\COMP3000.Target.cs",
+		"E:\\workspace\\comp3000\\COMP3000\\Source\\COMP3000Editor.Target.cs"
+	],
+	"EngineVersion": "5.3.1"
+}
