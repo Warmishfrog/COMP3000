@@ -1,0 +1,5 @@
+# Ignore files managed by Git LFS
+*.uasset
+*.db
+*.ipch
+*.pch
