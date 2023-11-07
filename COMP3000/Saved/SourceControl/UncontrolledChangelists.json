@@ -1,0 +1,24 @@
+{
+	"version": 1,
+	"changelists": [
+		{
+			"guid": "00000000000000000000000000000000",
+			"description": "Default Uncontrolled Changelist",
+			"files": [
+				"E:/workspace/comp3000/COMP3000/Content/map/testmap.umap",
+				"E:/workspace/comp3000/COMP3000/Content/BP_NewGameModeBase.uasset",
+				"E:/workspace/comp3000/COMP3000/Content/BP_FP_player.uasset",
+				"E:/workspace/comp3000/COMP3000/Content/BP_DiamondSquare.uasset",
+				"E:/workspace/comp3000/COMP3000/Content/BP_DiamondSquare_blueprint.uasset",
+				"E:/workspace/comp3000/COMP3000/Content/BP_DiamondSquare_cpp.uasset",
+				"E:/workspace/comp3000/COMP3000/Content/Chunk.uasset",
+				"E:/workspace/comp3000/COMP3000/Content/Landscape.uasset",
+				"E:/workspace/comp3000/COMP3000/Content/BP_LandscapeGen.uasset",
+				"E:/workspace/comp3000/COMP3000/Content/ignore/BP_DiamondSquare_blueprint.uasset",
+				"E:/workspace/comp3000/COMP3000/Content/ignore/Landscape.uasset",
+				"E:/workspace/comp3000/COMP3000/Content/ChunkPosition.uasset",
+				"E:/workspace/comp3000/COMP3000/Content/Blueprints/NewBlueprint.uasset"
+			]
+		}
+	]
+}
