@@ -57,6 +57,9 @@
     <ClCompile Include="..\..\Source\COMP3000\Private\DiamondSquare.cpp">
       <Filter>Source\COMP3000\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\COMP3000\Private\FPSProjectile.cpp">
+      <Filter>Source\COMP3000\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\COMP3000\Private\LandscapeGen.cpp">
       <Filter>Source\COMP3000\Private</Filter>
     </ClCompile>
@@ -64,6 +67,9 @@
       <UniqueIdentifier>{B84C98E3-8ED6-3D90-97A2-42B49C2BCC3F}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\Source\COMP3000\Public\DiamondSquare.h">
+      <Filter>Source\COMP3000\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\COMP3000\Public\FPSProjectile.h">
       <Filter>Source\COMP3000\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\COMP3000\Public\LandscapeGen.h">

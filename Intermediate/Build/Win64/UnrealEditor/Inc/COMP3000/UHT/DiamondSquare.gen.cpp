@@ -30,9 +30,11 @@ void EmptyLinkFunctionForGeneratedCodeDiamondSquare() {}
 		P_GET_PROPERTY(FFloatProperty,Z_Param_InNoiseScale);
 		P_GET_PROPERTY(FFloatProperty,Z_Param_InVertexDistance);
 		P_GET_PROPERTY(FFloatProperty,Z_Param_InUVScale);
+		P_GET_PROPERTY(FFloatProperty,Z_Param_InXOffset);
+		P_GET_PROPERTY(FFloatProperty,Z_Param_InYOffset);
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		P_THIS->SetChunkParameters(Z_Param_InSize,Z_Param_InZMultiplier,Z_Param_InNoiseScale,Z_Param_InVertexDistance,Z_Param_InUVScale);
+		P_THIS->SetChunkParameters(Z_Param_InSize,Z_Param_InZMultiplier,Z_Param_InNoiseScale,Z_Param_InVertexDistance,Z_Param_InUVScale,Z_Param_InXOffset,Z_Param_InYOffset);
 		P_NATIVE_END;
 	}
 	void ADiamondSquare::StaticRegisterNativesADiamondSquare()
@@ -53,12 +55,16 @@ void EmptyLinkFunctionForGeneratedCodeDiamondSquare() {}
 			float InNoiseScale;
 			float InVertexDistance;
 			float InUVScale;
+			float InXOffset;
+			float InYOffset;
 		};
 		static const UECodeGen_Private::FIntPropertyParams NewProp_InSize;
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_InZMultiplier;
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_InNoiseScale;
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_InVertexDistance;
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_InUVScale;
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_InXOffset;
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_InYOffset;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
@@ -70,12 +76,16 @@ void EmptyLinkFunctionForGeneratedCodeDiamondSquare() {}
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_ADiamondSquare_SetChunkParameters_Statics::NewProp_InNoiseScale = { "InNoiseScale", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(DiamondSquare_eventSetChunkParameters_Parms, InNoiseScale), METADATA_PARAMS(0, nullptr) };
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_ADiamondSquare_SetChunkParameters_Statics::NewProp_InVertexDistance = { "InVertexDistance", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(DiamondSquare_eventSetChunkParameters_Parms, InVertexDistance), METADATA_PARAMS(0, nullptr) };
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_ADiamondSquare_SetChunkParameters_Statics::NewProp_InUVScale = { "InUVScale", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(DiamondSquare_eventSetChunkParameters_Parms, InUVScale), METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_ADiamondSquare_SetChunkParameters_Statics::NewProp_InXOffset = { "InXOffset", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(DiamondSquare_eventSetChunkParameters_Parms, InXOffset), METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_ADiamondSquare_SetChunkParameters_Statics::NewProp_InYOffset = { "InYOffset", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(DiamondSquare_eventSetChunkParameters_Parms, InYOffset), METADATA_PARAMS(0, nullptr) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ADiamondSquare_SetChunkParameters_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ADiamondSquare_SetChunkParameters_Statics::NewProp_InSize,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ADiamondSquare_SetChunkParameters_Statics::NewProp_InZMultiplier,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ADiamondSquare_SetChunkParameters_Statics::NewProp_InNoiseScale,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ADiamondSquare_SetChunkParameters_Statics::NewProp_InVertexDistance,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ADiamondSquare_SetChunkParameters_Statics::NewProp_InUVScale,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ADiamondSquare_SetChunkParameters_Statics::NewProp_InXOffset,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ADiamondSquare_SetChunkParameters_Statics::NewProp_InYOffset,
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ADiamondSquare_SetChunkParameters_Statics::Function_MetaDataParams[] = {
@@ -155,6 +165,14 @@ void EmptyLinkFunctionForGeneratedCodeDiamondSquare() {}
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_NoiseScale;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_XOffset_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_XOffset;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_YOffset_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_YOffset;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_VertexDistance_MetaData[];
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_VertexDistance;
@@ -172,7 +190,7 @@ void EmptyLinkFunctionForGeneratedCodeDiamondSquare() {}
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_ADiamondSquare_Statics::DependentSingletons) < 16);
 	const FClassFunctionLinkInfo Z_Construct_UClass_ADiamondSquare_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_ADiamondSquare_SetChunkParameters, "SetChunkParameters" }, // 461200226
+		{ &Z_Construct_UFunction_ADiamondSquare_SetChunkParameters, "SetChunkParameters" }, // 352595262
 		{ &Z_Construct_UFunction_ADiamondSquare_SetMaterial, "SetMaterial" }, // 1218100870
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_ADiamondSquare_Statics::FuncInfo) < 2048);
@@ -219,6 +237,22 @@ void EmptyLinkFunctionForGeneratedCodeDiamondSquare() {}
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ADiamondSquare_Statics::NewProp_NoiseScale = { "NoiseScale", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ADiamondSquare, NoiseScale), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ADiamondSquare_Statics::NewProp_NoiseScale_MetaData), Z_Construct_UClass_ADiamondSquare_Statics::NewProp_NoiseScale_MetaData) };
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ADiamondSquare_Statics::NewProp_XOffset_MetaData[] = {
+		{ "Category", "DiamondSquare" },
+		{ "CLampMin", "0" },
+		{ "ModuleRelativePath", "Public/DiamondSquare.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ADiamondSquare_Statics::NewProp_XOffset = { "XOffset", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ADiamondSquare, XOffset), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ADiamondSquare_Statics::NewProp_XOffset_MetaData), Z_Construct_UClass_ADiamondSquare_Statics::NewProp_XOffset_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ADiamondSquare_Statics::NewProp_YOffset_MetaData[] = {
+		{ "Category", "DiamondSquare" },
+		{ "CLampMin", "0" },
+		{ "ModuleRelativePath", "Public/DiamondSquare.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ADiamondSquare_Statics::NewProp_YOffset = { "YOffset", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ADiamondSquare, YOffset), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ADiamondSquare_Statics::NewProp_YOffset_MetaData), Z_Construct_UClass_ADiamondSquare_Statics::NewProp_YOffset_MetaData) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ADiamondSquare_Statics::NewProp_VertexDistance_MetaData[] = {
 		{ "Category", "DiamondSquare" },
 		{ "CLampMin", "0.000001" },
@@ -244,6 +278,8 @@ void EmptyLinkFunctionForGeneratedCodeDiamondSquare() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ADiamondSquare_Statics::NewProp_Size,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ADiamondSquare_Statics::NewProp_ZMultiplier,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ADiamondSquare_Statics::NewProp_NoiseScale,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ADiamondSquare_Statics::NewProp_XOffset,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ADiamondSquare_Statics::NewProp_YOffset,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ADiamondSquare_Statics::NewProp_VertexDistance,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ADiamondSquare_Statics::NewProp_UVScale,
 	};
@@ -285,9 +321,9 @@ void EmptyLinkFunctionForGeneratedCodeDiamondSquare() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_Public_DiamondSquare_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_ADiamondSquare, ADiamondSquare::StaticClass, TEXT("ADiamondSquare"), &Z_Registration_Info_UClass_ADiamondSquare, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ADiamondSquare), 1394865773U) },
+		{ Z_Construct_UClass_ADiamondSquare, ADiamondSquare::StaticClass, TEXT("ADiamondSquare"), &Z_Registration_Info_UClass_ADiamondSquare, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ADiamondSquare), 981954274U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_Public_DiamondSquare_h_2637869647(TEXT("/Script/COMP3000"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_Public_DiamondSquare_h_2202289696(TEXT("/Script/COMP3000"),
 		Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_Public_DiamondSquare_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_Public_DiamondSquare_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

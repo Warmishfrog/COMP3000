@@ -27,15 +27,21 @@ public:
 		float ZMultiplier = 500.0f;
 	UPROPERTY(EditAnywhere, Meta = (CLampMin = 0))
 		float NoiseScale = 0.1f;
+	UPROPERTY(EditAnywhere, Meta = (CLampMin = 0))
+		float XOffset = 0.0f;
+	UPROPERTY(EditAnywhere, Meta = (CLampMin = 0))
+		float YOffset = 0.0f;
 
 	//Material and Vertices Scaling
 	UPROPERTY(EditAnywhere, Meta = (CLampMin = 0.000001))
 		float VertexDistance = 100.0f;
 	UPROPERTY(EditAnywhere, Meta = (CLampMin = 0.000001))
 		float UVScale = 1.0f;
+
+	
 		
 	UFUNCTION(BlueprintCallable, Category = "Terrain Generation")
-	void SetChunkParameters(int32 InSize, float InZMultiplier, float InNoiseScale, float InVertexDistance, float InUVScale);
+	void SetChunkParameters(int32 InSize, float InZMultiplier, float InNoiseScale, float InVertexDistance, float InUVScale, float InXOffset, float InYOffset);
 
 	
 	UFUNCTION(BlueprintCallable, Category = "Terrain Generation")

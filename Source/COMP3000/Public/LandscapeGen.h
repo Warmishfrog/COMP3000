@@ -13,15 +13,25 @@ struct FChunkPosition
 	GENERATED_USTRUCT_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int X;
+	int32 X;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int Y;
+	int32 Y;
 
 	FChunkPosition()
 		: X(0)
 		, Y(0)
+	{}	
+	// Define the equality operator (==)
+	bool operator==(const FChunkPosition& Other) const
 	{
+		return X == Other.X && Y == Other.Y;
+	}
+
+	// Define ValueTypeHash for FChunkPosition
+	friend uint32 GetTypeHash(const FChunkPosition& ChunkPosition)
+	{
+		return HashCombine(GetTypeHash(ChunkPosition.X), GetTypeHash(ChunkPosition.Y));
 	}
 };
 
@@ -34,6 +44,8 @@ public:
 	// Sets default values for this actor's properties
 	ALandscapeGen();
 
+	UPROPERTY(EditAnywhere)
+	int Distance;
 
 	UPROPERTY(EditAnywhere, Meta = (CLampMin = 0))
 	int Size = 1;
@@ -43,6 +55,10 @@ public:
 	float ZMultiplier = 500.0f;
 	UPROPERTY(EditAnywhere, Meta = (CLampMin = 0))
 	float NoiseScale = 0.1f;
+	UPROPERTY(EditAnywhere, Meta = (CLampMin = 0))
+	float XOffset = 0.0f;
+	UPROPERTY(EditAnywhere, Meta = (CLampMin = 0))
+	float YOffset = 0.0f;
 
 	//Material and Vertices Scaling
 	UPROPERTY(EditAnywhere, Meta = (CLampMin = 0.000001))
@@ -53,12 +69,17 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Material")
 	UMaterialInterface* Material;
 
-	//Chunk stuff
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Chunk Position")
-	FChunkPosition CurrentChunkPosition;
+	FChunkPosition Current;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Chunk Position")
+	FChunkPosition Visible;
+	
+	UPROPERTY(EditAnywhere, Category = "Chunk Position")
+	TSet<FChunkPosition> Generated;
+
+	virtual void Tick(float DeltaTime) override;
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 private:

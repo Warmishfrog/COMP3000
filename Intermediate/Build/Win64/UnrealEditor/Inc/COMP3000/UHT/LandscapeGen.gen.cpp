@@ -111,6 +111,10 @@ template<> COMP3000_API UScriptStruct* StaticStruct<FChunkPosition>()
 		static const UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Distance_MetaData[];
+#endif
+		static const UECodeGen_Private::FIntPropertyParams NewProp_Distance;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_Size_MetaData[];
 #endif
 		static const UECodeGen_Private::FIntPropertyParams NewProp_Size;
@@ -122,6 +126,14 @@ template<> COMP3000_API UScriptStruct* StaticStruct<FChunkPosition>()
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_NoiseScale_MetaData[];
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_NoiseScale;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_XOffset_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_XOffset;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_YOffset_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_YOffset;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_VertexDistance_MetaData[];
 #endif
@@ -135,9 +147,18 @@ template<> COMP3000_API UScriptStruct* StaticStruct<FChunkPosition>()
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_Material;
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_CurrentChunkPosition_MetaData[];
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Current_MetaData[];
 #endif
-		static const UECodeGen_Private::FStructPropertyParams NewProp_CurrentChunkPosition;
+		static const UECodeGen_Private::FStructPropertyParams NewProp_Current;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Visible_MetaData[];
+#endif
+		static const UECodeGen_Private::FStructPropertyParams NewProp_Visible;
+		static const UECodeGen_Private::FStructPropertyParams NewProp_Generated_ElementProp;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Generated_MetaData[];
+#endif
+		static const UECodeGen_Private::FSetPropertyParams NewProp_Generated;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -153,6 +174,13 @@ template<> COMP3000_API UScriptStruct* StaticStruct<FChunkPosition>()
 		{ "ModuleRelativePath", "Public/LandscapeGen.h" },
 	};
 #endif
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Distance_MetaData[] = {
+		{ "Category", "LandscapeGen" },
+		{ "ModuleRelativePath", "Public/LandscapeGen.h" },
+	};
+#endif
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Distance = { "Distance", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ALandscapeGen, Distance), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Distance_MetaData), Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Distance_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Size_MetaData[] = {
 		{ "Category", "LandscapeGen" },
@@ -184,6 +212,22 @@ template<> COMP3000_API UScriptStruct* StaticStruct<FChunkPosition>()
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ALandscapeGen_Statics::NewProp_NoiseScale = { "NoiseScale", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ALandscapeGen, NoiseScale), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ALandscapeGen_Statics::NewProp_NoiseScale_MetaData), Z_Construct_UClass_ALandscapeGen_Statics::NewProp_NoiseScale_MetaData) };
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ALandscapeGen_Statics::NewProp_XOffset_MetaData[] = {
+		{ "Category", "LandscapeGen" },
+		{ "CLampMin", "0" },
+		{ "ModuleRelativePath", "Public/LandscapeGen.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ALandscapeGen_Statics::NewProp_XOffset = { "XOffset", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ALandscapeGen, XOffset), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ALandscapeGen_Statics::NewProp_XOffset_MetaData), Z_Construct_UClass_ALandscapeGen_Statics::NewProp_XOffset_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ALandscapeGen_Statics::NewProp_YOffset_MetaData[] = {
+		{ "Category", "LandscapeGen" },
+		{ "CLampMin", "0" },
+		{ "ModuleRelativePath", "Public/LandscapeGen.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ALandscapeGen_Statics::NewProp_YOffset = { "YOffset", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ALandscapeGen, YOffset), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ALandscapeGen_Statics::NewProp_YOffset_MetaData), Z_Construct_UClass_ALandscapeGen_Statics::NewProp_YOffset_MetaData) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ALandscapeGen_Statics::NewProp_VertexDistance_MetaData[] = {
 		{ "Category", "LandscapeGen" },
 		{ "CLampMin", "0.000001" },
@@ -213,26 +257,42 @@ template<> COMP3000_API UScriptStruct* StaticStruct<FChunkPosition>()
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Material = { "Material", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ALandscapeGen, Material), Z_Construct_UClass_UMaterialInterface_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Material_MetaData), Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Material_MetaData) };
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ALandscapeGen_Statics::NewProp_CurrentChunkPosition_MetaData[] = {
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Current_MetaData[] = {
 		{ "Category", "Chunk Position" },
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "//Chunk stuff\n" },
-#endif
 		{ "ModuleRelativePath", "Public/LandscapeGen.h" },
-#if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Chunk stuff" },
-#endif
 	};
 #endif
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_ALandscapeGen_Statics::NewProp_CurrentChunkPosition = { "CurrentChunkPosition", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ALandscapeGen, CurrentChunkPosition), Z_Construct_UScriptStruct_FChunkPosition, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ALandscapeGen_Statics::NewProp_CurrentChunkPosition_MetaData), Z_Construct_UClass_ALandscapeGen_Statics::NewProp_CurrentChunkPosition_MetaData) }; // 1490250955
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Current = { "Current", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ALandscapeGen, Current), Z_Construct_UScriptStruct_FChunkPosition, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Current_MetaData), Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Current_MetaData) }; // 1490250955
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Visible_MetaData[] = {
+		{ "Category", "Chunk Position" },
+		{ "ModuleRelativePath", "Public/LandscapeGen.h" },
+	};
+#endif
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Visible = { "Visible", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ALandscapeGen, Visible), Z_Construct_UScriptStruct_FChunkPosition, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Visible_MetaData), Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Visible_MetaData) }; // 1490250955
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Generated_ElementProp = { "Generated", nullptr, (EPropertyFlags)0x0000000000000001, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FChunkPosition, METADATA_PARAMS(0, nullptr) }; // 1490250955
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Generated_MetaData[] = {
+		{ "Category", "Chunk Position" },
+		{ "ModuleRelativePath", "Public/LandscapeGen.h" },
+	};
+#endif
+	static_assert(TModels_V<CGetTypeHashable, FChunkPosition>, "The structure 'FChunkPosition' is used in a TSet but does not have a GetValueTypeHash defined");
+	const UECodeGen_Private::FSetPropertyParams Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Generated = { "Generated", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Set, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ALandscapeGen, Generated), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Generated_MetaData), Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Generated_MetaData) }; // 1490250955
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ALandscapeGen_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Distance,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Size,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALandscapeGen_Statics::NewProp_ZMultiplier,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALandscapeGen_Statics::NewProp_NoiseScale,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALandscapeGen_Statics::NewProp_XOffset,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALandscapeGen_Statics::NewProp_YOffset,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALandscapeGen_Statics::NewProp_VertexDistance,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALandscapeGen_Statics::NewProp_UVScale,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Material,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALandscapeGen_Statics::NewProp_CurrentChunkPosition,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Current,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Visible,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Generated_ElementProp,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Generated,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ALandscapeGen_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<ALandscapeGen>::IsAbstract,
@@ -276,9 +336,9 @@ template<> COMP3000_API UScriptStruct* StaticStruct<FChunkPosition>()
 		{ FChunkPosition::StaticStruct, Z_Construct_UScriptStruct_FChunkPosition_Statics::NewStructOps, TEXT("ChunkPosition"), &Z_Registration_Info_UScriptStruct_ChunkPosition, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FChunkPosition), 1490250955U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_Public_LandscapeGen_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_ALandscapeGen, ALandscapeGen::StaticClass, TEXT("ALandscapeGen"), &Z_Registration_Info_UClass_ALandscapeGen, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ALandscapeGen), 2529907426U) },
+		{ Z_Construct_UClass_ALandscapeGen, ALandscapeGen::StaticClass, TEXT("ALandscapeGen"), &Z_Registration_Info_UClass_ALandscapeGen, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ALandscapeGen), 665681313U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_Public_LandscapeGen_h_3990108891(TEXT("/Script/COMP3000"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_Public_LandscapeGen_h_3694840848(TEXT("/Script/COMP3000"),
 		Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_Public_LandscapeGen_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_Public_LandscapeGen_h_Statics::ClassInfo),
 		Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_Public_LandscapeGen_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_Public_LandscapeGen_h_Statics::ScriptStructInfo),
 		nullptr, 0);

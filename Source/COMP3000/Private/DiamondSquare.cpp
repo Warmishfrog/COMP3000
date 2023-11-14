@@ -39,7 +39,7 @@ void ADiamondSquare::CreateVertices()
 	{
 		for (int Y = 0; Y <= Size; ++Y)
 		{
-			float Z = FMath::PerlinNoise2D(FVector2D(X * NoiseScale + 0.1, Y * NoiseScale + 0.1)) * ZMultiplier;
+			float Z = FMath::PerlinNoise2D(FVector2D(NoiseScale * (X + 0.1 + XOffset), NoiseScale * (Y + 0.1 + YOffset))) * ZMultiplier;
 			//GEngine->AddOnScreenDebugMessage(-1, 999.0f, FColor::Yellow, FString::Printf(TEXT("Z %f"), Z)); //debug for Z positions
 			Vertices.Add(FVector((Size/-2 + X) * VertexDistance, (Size/-2 + Y) * VertexDistance, Z)); //X = (Size/2 +X)* VertexDistance //coordinates
 			UV0.Add(FVector2D((Size / 2 + X) * UVScale, (Size / 2 + Y) * UVScale));
@@ -71,13 +71,15 @@ void ADiamondSquare::CreateTriangles()
 	}
 }
 
-void ADiamondSquare::SetChunkParameters(int32 InSize, float InZMultiplier, float InNoiseScale, float InVertexDistance, float InUVScale)
+void ADiamondSquare::SetChunkParameters(int32 InSize, float InZMultiplier, float InNoiseScale, float InVertexDistance, float InUVScale, float InXOffset, float InYOffset)
 {
 	Size = InSize;
 	ZMultiplier = InZMultiplier;
 	NoiseScale = InNoiseScale;
 	VertexDistance = InVertexDistance;
 	UVScale = InUVScale;
+	XOffset = InXOffset;
+	YOffset = InYOffset;
 
 	CreateVertices();
 	CreateTriangles();
