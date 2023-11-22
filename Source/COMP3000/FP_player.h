@@ -5,16 +5,14 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "FPSProjectile.h"
+#include "TimerManager.h"
 #include "FP_player.generated.h"
+
 
 UCLASS()
 class COMP3000_API AFP_player : public ACharacter
 {
 	GENERATED_BODY()
-
-public:
-	// Sets default values for this character's properties
-	AFP_player();
 
 protected:
 	// Called when the game starts or when spawned
@@ -24,12 +22,31 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = Projectile)
 	TSubclassOf<class AFPSProjectile> ProjectileClass;
 
+
+	FTimerHandle  FireRateTimerHandle;
+	FTimerHandle  AutoFireRateTimerHandle;
+
+
 public:	
+
+	// Sets default values for this character's properties
+	AFP_player();
+
+	bool CanFire = true;
+	float FireRate = 0.5f;
+	bool bIsFiring;
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	UFUNCTION()
+	void StartFiring();
+
+	UFUNCTION()
+	void StopFiring();
 
 	// Handles input for moving forward and backward.
 	UFUNCTION()
@@ -50,6 +67,9 @@ public:
 	// Function that handles firing projectiles.
 	UFUNCTION()
 	void Fire();
+
+	UFUNCTION()
+	void ResetCanFire();
 
 	// Gun muzzle offset from the camera location.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)

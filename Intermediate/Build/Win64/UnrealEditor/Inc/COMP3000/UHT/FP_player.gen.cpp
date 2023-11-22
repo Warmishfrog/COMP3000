@@ -17,6 +17,13 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 	ENGINE_API UClass* Z_Construct_UClass_ACharacter();
 	UPackage* Z_Construct_UPackage__Script_COMP3000();
 // End Cross Module References
+	DEFINE_FUNCTION(AFP_player::execResetCanFire)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->ResetCanFire();
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(AFP_player::execFire)
 	{
 		P_FINISH;
@@ -54,6 +61,20 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 		P_THIS->MoveForward(Z_Param_Value);
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(AFP_player::execStopFiring)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->StopFiring();
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(AFP_player::execStartFiring)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->StartFiring();
+		P_NATIVE_END;
+	}
 	void AFP_player::StaticRegisterNativesAFP_player()
 	{
 		UClass* Class = AFP_player::StaticClass();
@@ -61,7 +82,10 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 			{ "Fire", &AFP_player::execFire },
 			{ "MoveForward", &AFP_player::execMoveForward },
 			{ "MoveRight", &AFP_player::execMoveRight },
+			{ "ResetCanFire", &AFP_player::execResetCanFire },
+			{ "StartFiring", &AFP_player::execStartFiring },
 			{ "StartJump", &AFP_player::execStartJump },
+			{ "StopFiring", &AFP_player::execStopFiring },
 			{ "StopJump", &AFP_player::execStopJump },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
@@ -174,6 +198,50 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_AFP_player_ResetCanFire_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AFP_player_ResetCanFire_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "FP_player.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AFP_player_ResetCanFire_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AFP_player, nullptr, "ResetCanFire", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AFP_player_ResetCanFire_Statics::Function_MetaDataParams), Z_Construct_UFunction_AFP_player_ResetCanFire_Statics::Function_MetaDataParams) };
+	UFunction* Z_Construct_UFunction_AFP_player_ResetCanFire()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AFP_player_ResetCanFire_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AFP_player_StartFiring_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AFP_player_StartFiring_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "FP_player.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AFP_player_StartFiring_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AFP_player, nullptr, "StartFiring", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AFP_player_StartFiring_Statics::Function_MetaDataParams), Z_Construct_UFunction_AFP_player_StartFiring_Statics::Function_MetaDataParams) };
+	UFunction* Z_Construct_UFunction_AFP_player_StartFiring()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AFP_player_StartFiring_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	struct Z_Construct_UFunction_AFP_player_StartJump_Statics
 	{
 #if WITH_METADATA
@@ -199,6 +267,28 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AFP_player_StartJump_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AFP_player_StopFiring_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AFP_player_StopFiring_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "FP_player.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AFP_player_StopFiring_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AFP_player, nullptr, "StopFiring", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AFP_player_StopFiring_Statics::Function_MetaDataParams), Z_Construct_UFunction_AFP_player_StopFiring_Statics::Function_MetaDataParams) };
+	UFunction* Z_Construct_UFunction_AFP_player_StopFiring()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AFP_player_StopFiring_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -263,7 +353,10 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 		{ &Z_Construct_UFunction_AFP_player_Fire, "Fire" }, // 4261626434
 		{ &Z_Construct_UFunction_AFP_player_MoveForward, "MoveForward" }, // 2742964377
 		{ &Z_Construct_UFunction_AFP_player_MoveRight, "MoveRight" }, // 2969092450
+		{ &Z_Construct_UFunction_AFP_player_ResetCanFire, "ResetCanFire" }, // 2092735917
+		{ &Z_Construct_UFunction_AFP_player_StartFiring, "StartFiring" }, // 1327279964
 		{ &Z_Construct_UFunction_AFP_player_StartJump, "StartJump" }, // 1660933228
+		{ &Z_Construct_UFunction_AFP_player_StopFiring, "StopFiring" }, // 4191470192
 		{ &Z_Construct_UFunction_AFP_player_StopJump, "StopJump" }, // 3137902023
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::FuncInfo) < 2048);
@@ -342,9 +435,9 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_FP_player_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AFP_player, AFP_player::StaticClass, TEXT("AFP_player"), &Z_Registration_Info_UClass_AFP_player, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFP_player), 1625739206U) },
+		{ Z_Construct_UClass_AFP_player, AFP_player::StaticClass, TEXT("AFP_player"), &Z_Registration_Info_UClass_AFP_player, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFP_player), 2309779465U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_FP_player_h_827283518(TEXT("/Script/COMP3000"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_FP_player_h_2013236780(TEXT("/Script/COMP3000"),
 		Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_FP_player_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_FP_player_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

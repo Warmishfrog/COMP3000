@@ -16,14 +16,7 @@ void AFP_player::BeginPlay()
 {
 	Super::BeginPlay();
 
-	check(GEngine != nullptr);
-
-	// Display a debug message for five seconds. 
-	// The -1 "Key" value argument prevents the message from being updated or refreshed.
-	// 
-	// debug
-	//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("We are using my player."));
-	
+	check(GEngine != nullptr)
 }
 
 // Called every frame
@@ -47,8 +40,24 @@ void AFP_player::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 	// Set up "action" bindings.
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AFP_player::StartJump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &AFP_player::StopJump);
-	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &AFP_player::Fire);
+	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &AFP_player::StartFiring);
+    PlayerInputComponent->BindAction("Fire", IE_Released, this, &AFP_player::StopFiring);
 
+    //
+
+}
+
+void AFP_player::StartFiring()
+{
+    bIsFiring = true;
+    GetWorldTimerManager().SetTimer(AutoFireRateTimerHandle, this, &AFP_player::Fire, FireRate, true);
+    Fire(); // Initial shot when button is pressed
+}
+
+void AFP_player::StopFiring()
+{
+    bIsFiring = false;
+    GetWorldTimerManager().ClearTimer(AutoFireRateTimerHandle);
 }
 
 void AFP_player::MoveForward(float Value)
@@ -77,6 +86,7 @@ void AFP_player::StopJump()
 
 void AFP_player::Fire()
 {
+    
     // Attempt to fire a projectile.
     if (ProjectileClass)
     {
@@ -93,7 +103,7 @@ void AFP_player::Fire()
 
         // Skew the aim to be slightly upwards.
         FRotator MuzzleRotation = CameraRotation;
-        MuzzleRotation.Pitch += 10.0f;
+        MuzzleRotation.Pitch += 5.0f;
 
         UWorld* World = GetWorld();
         if (World)
@@ -102,15 +112,26 @@ void AFP_player::Fire()
             SpawnParams.Owner = this;
             SpawnParams.Instigator = GetInstigator();
 
-            // Spawn the projectile at the muzzle.
-            AFPSProjectile* Projectile = World->SpawnActor<AFPSProjectile>(ProjectileClass, MuzzleLocation, MuzzleRotation, SpawnParams);
-            if (Projectile)
+            if (CanFire)
             {
-                // Set the projectile's initial trajectory.
-                FVector LaunchDirection = MuzzleRotation.Vector();
-                Projectile->FireInDirection(LaunchDirection);
+                // Spawn the projectile at the muzzle.
+                AFPSProjectile* Projectile = World->SpawnActor<AFPSProjectile>(ProjectileClass, MuzzleLocation, MuzzleRotation, SpawnParams);
+                if (Projectile)
+                {
+                    // Set the projectile's initial trajectory.
+                    FVector LaunchDirection = MuzzleRotation.Vector();
+                    Projectile->FireInDirection(LaunchDirection);
+                }
+
+                CanFire = false; // Set to false to prevent firing during the cooldown period
+                GetWorldTimerManager().SetTimer(FireRateTimerHandle, this, &AFP_player::ResetCanFire, FireRate, false);
             }
         }
     }
+}
+
+void AFP_player::ResetCanFire()
+{
+    CanFire = true; // Set to true to allow firing again after the cooldown period
 }
 
