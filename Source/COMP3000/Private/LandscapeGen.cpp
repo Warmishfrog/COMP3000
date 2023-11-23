@@ -10,7 +10,6 @@
 ALandscapeGen::ALandscapeGen()
 {
 	PrimaryActorTick.bCanEverTick = true;
-    
 }
 
 void ALandscapeGen::BeginPlay()
@@ -19,8 +18,6 @@ void ALandscapeGen::BeginPlay()
 
     // debug for beginplay
     GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("ALandscapeGen BeginPlay"));
-
-    
 }
 
 void ALandscapeGen::Tick(float DeltaTime)
@@ -64,6 +61,7 @@ void ALandscapeGen::Tick(float DeltaTime)
                     
                 //DiamondSquareActor->AttachToActor(this, FAttachmentTransformRules::SnapToTargetIncludingScale);
                 Generated.Add(FChunkPosition(Visible));
+
             }            
         }
     }

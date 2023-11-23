@@ -7,8 +7,14 @@ ADiamondSquare::ADiamondSquare()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
-	ProceduralMesh = CreateDefaultSubobject<UProceduralMeshComponent>("ProceduralMesh");
-	ProceduralMesh->SetupAttachment(GetRootComponent());
+	//ProceduralMesh = CreateDefaultSubobject<UProceduralMeshComponent>("ProceduralMesh");
+	//ProceduralMesh->SetupAttachment(GetRootComponent());
+
+	USceneComponent* RootComp = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
+	RootComponent = RootComp;
+
+	ProceduralMesh = CreateDefaultSubobject<UProceduralMeshComponent>(TEXT("ProceduralMesh"));
+	ProceduralMesh->SetupAttachment(RootComponent);
 }
 
 void ADiamondSquare::OnConstruction(const FTransform& Transform)
@@ -18,6 +24,8 @@ void ADiamondSquare::OnConstruction(const FTransform& Transform)
 	Vertices.Reset();
 	Triangles.Reset();
 	UV0.Reset();
+
+
 	
 }
 
@@ -86,7 +94,6 @@ void ADiamondSquare::SetChunkParameters(int32 InSize, float InZMultiplier, float
 
 	UKismetProceduralMeshLibrary::CalculateTangentsForMesh(Vertices, Triangles, UV0, Normals, Tangents);
 	ProceduralMesh->CreateMeshSection(0, Vertices, Triangles, Normals, UV0, TArray<FColor>(), Tangents, true);
-	//ProceduralMesh->SetMaterial(0, Material);	
 }
 
 void ADiamondSquare::SetMaterial(UMaterialInterface* Material)

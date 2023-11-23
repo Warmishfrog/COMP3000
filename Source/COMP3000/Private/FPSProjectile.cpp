@@ -21,7 +21,7 @@ AFPSProjectile::AFPSProjectile()
         // Set the sphere's collision profile name to "Projectile".
         CollisionComponent->BodyInstance.SetCollisionProfileName(TEXT("Projectile"));
         // Event called when component hits something.
-        //CollisionComponent->OnComponentHit.AddDynamic(this, &AFPSProjectile::OnHit);
+        CollisionComponent->OnComponentHit.AddDynamic(this, &AFPSProjectile::OnHit);
         // Set the sphere's collision radius.
         CollisionComponent->InitSphereRadius(15.0f);
         // Set the root component to be the collision component.
@@ -88,6 +88,8 @@ void AFPSProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor
     {
         OtherComponent->AddImpulseAtLocation(ProjectileMovementComponent->Velocity * 100.0f, Hit.ImpactPoint);
     }
-    Destroy();
+    else {
+        Destroy();
+    }
 }
 

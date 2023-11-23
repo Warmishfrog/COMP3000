@@ -61,6 +61,6 @@ public:
 	UPROPERTY(EditAnywhere, Category = Projectile)
 	float val_ProjectileGravityScale = .1f;
 	UPROPERTY(EditAnywhere, Category = Projectile)
-	float val_lifespan = 2.0f;
+	float val_lifespan = 5.0f;
 
 };

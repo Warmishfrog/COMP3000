@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 
 #include "FP_player.h"
 
@@ -23,6 +21,10 @@ void AFP_player::BeginPlay()
 void AFP_player::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+    // debug log player location
+    //FVector MyCharacter = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
+    //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Player Location: %s"), *MyCharacter.ToString()));
 
 }
 
