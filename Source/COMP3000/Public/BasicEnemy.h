@@ -28,8 +28,6 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 	bool CanDealDamage;
 
-	class AFindPlayerPosition* FP_player_ref;
-
 	UPROPERTY(EditAnywhere)
 	class USphereComponent* PlayerCollisionDetection;
 
@@ -47,6 +45,9 @@ public:
 	UPROPERTY(EditAnywhere)
 	float StoppingDistance = 100.0f;
 
+	UPROPERTY(EditAnywhere)
+	float Speed = 100.0f;
+
 	FTimerHandle SeekPlayerTimerHandle;
 
 	UFUNCTION()
@@ -62,11 +63,6 @@ public:
 	void OnPlayerDetectedOverlapBegin(class UPrimitiveComponent* OverlappedComp,
 		class AActor* OtherActor, class UPrimitiveComponent* OtherComp,
 		int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-
-	UFUNCTION()
-	void OnPlayerDetectedOverlapEnd(class UPrimitiveComponent* OverlappedComp,
-		class AActor* OtherActor, class UPrimitiveComponent* OtherComp,
-		int32 OtherBodyIndex);
 
 	UFUNCTION()
 	void OnPlayerAttackOverlapBegin(class UPrimitiveComponent* OverlappedComp,

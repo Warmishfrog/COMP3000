@@ -63,6 +63,9 @@
     <ClCompile Include="..\..\Source\COMP3000\Private\DiamondSquare.cpp">
       <Filter>Source\COMP3000\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\COMP3000\Private\EnemyController.cpp">
+      <Filter>Source\COMP3000\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\COMP3000\Private\FindPlayerPosition.cpp">
       <Filter>Source\COMP3000\Private</Filter>
     </ClCompile>
@@ -85,6 +88,9 @@
       <Filter>Source\COMP3000\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\COMP3000\Public\DiamondSquare.h">
+      <Filter>Source\COMP3000\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\COMP3000\Public\EnemyController.h">
       <Filter>Source\COMP3000\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\COMP3000\Public\FindPlayerPosition.h">

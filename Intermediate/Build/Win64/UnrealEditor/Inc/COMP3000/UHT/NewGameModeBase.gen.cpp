@@ -9,8 +9,10 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeNewGameModeBase() {}
 // Cross Module References
+	COMP3000_API UClass* Z_Construct_UClass_ABasicEnemy_NoRegister();
 	COMP3000_API UClass* Z_Construct_UClass_ANewGameModeBase();
 	COMP3000_API UClass* Z_Construct_UClass_ANewGameModeBase_NoRegister();
+	COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 	ENGINE_API UClass* Z_Construct_UClass_AGameModeBase();
 	UPackage* Z_Construct_UPackage__Script_COMP3000();
 // End Cross Module References
@@ -28,6 +30,11 @@ void EmptyLinkFunctionForGeneratedCodeNewGameModeBase() {}
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_EnemyToSpawn_MetaData[];
+#endif
+		static const UECodeGen_Private::FClassPropertyParams NewProp_EnemyToSpawn;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
 	};
@@ -47,6 +54,16 @@ void EmptyLinkFunctionForGeneratedCodeNewGameModeBase() {}
 		{ "ShowCategories", "Input|MouseInput Input|TouchInput" },
 	};
 #endif
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANewGameModeBase_Statics::NewProp_EnemyToSpawn_MetaData[] = {
+		{ "Category", "Spawn" },
+		{ "ModuleRelativePath", "NewGameModeBase.h" },
+	};
+#endif
+	const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_ANewGameModeBase_Statics::NewProp_EnemyToSpawn = { "EnemyToSpawn", nullptr, (EPropertyFlags)0x0014000000010001, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANewGameModeBase, EnemyToSpawn), Z_Construct_UClass_UClass, Z_Construct_UClass_ABasicEnemy_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANewGameModeBase_Statics::NewProp_EnemyToSpawn_MetaData), Z_Construct_UClass_ANewGameModeBase_Statics::NewProp_EnemyToSpawn_MetaData) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ANewGameModeBase_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANewGameModeBase_Statics::NewProp_EnemyToSpawn,
+	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ANewGameModeBase_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<ANewGameModeBase>::IsAbstract,
 	};
@@ -56,15 +73,16 @@ void EmptyLinkFunctionForGeneratedCodeNewGameModeBase() {}
 		&StaticCppClassTypeInfo,
 		DependentSingletons,
 		nullptr,
-		nullptr,
+		Z_Construct_UClass_ANewGameModeBase_Statics::PropPointers,
 		nullptr,
 		UE_ARRAY_COUNT(DependentSingletons),
 		0,
-		0,
+		UE_ARRAY_COUNT(Z_Construct_UClass_ANewGameModeBase_Statics::PropPointers),
 		0,
 		0x009002ACu,
 		METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANewGameModeBase_Statics::Class_MetaDataParams), Z_Construct_UClass_ANewGameModeBase_Statics::Class_MetaDataParams)
 	};
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_ANewGameModeBase_Statics::PropPointers) < 2048);
 	UClass* Z_Construct_UClass_ANewGameModeBase()
 	{
 		if (!Z_Registration_Info_UClass_ANewGameModeBase.OuterSingleton)
@@ -77,7 +95,6 @@ void EmptyLinkFunctionForGeneratedCodeNewGameModeBase() {}
 	{
 		return ANewGameModeBase::StaticClass();
 	}
-	ANewGameModeBase::ANewGameModeBase(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {}
 	DEFINE_VTABLE_PTR_HELPER_CTOR(ANewGameModeBase);
 	ANewGameModeBase::~ANewGameModeBase() {}
 	struct Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_NewGameModeBase_h_Statics
@@ -85,9 +102,9 @@ void EmptyLinkFunctionForGeneratedCodeNewGameModeBase() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_NewGameModeBase_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_ANewGameModeBase, ANewGameModeBase::StaticClass, TEXT("ANewGameModeBase"), &Z_Registration_Info_UClass_ANewGameModeBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANewGameModeBase), 1726328801U) },
+		{ Z_Construct_UClass_ANewGameModeBase, ANewGameModeBase::StaticClass, TEXT("ANewGameModeBase"), &Z_Registration_Info_UClass_ANewGameModeBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANewGameModeBase), 2746095002U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_NewGameModeBase_h_2647853018(TEXT("/Script/COMP3000"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_NewGameModeBase_h_3214362561(TEXT("/Script/COMP3000"),
 		Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_NewGameModeBase_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_NewGameModeBase_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

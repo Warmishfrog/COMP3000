@@ -23,10 +23,7 @@ void ADiamondSquare::OnConstruction(const FTransform& Transform)
 
 	Vertices.Reset();
 	Triangles.Reset();
-	UV0.Reset();
-
-
-	
+	UV0.Reset();	
 }
 
 void ADiamondSquare::BeginPlay()

@@ -2,14 +2,50 @@
 
 
 #include "NewGameModeBase.h"
+#include "Kismet/GameplayStatics.h"
+#include "BasicEnemy.h"
+#include "Navigation/PathFollowingComponent.h"
+#include "BasicEnemyAIController.h"
 
-void ANewGameModeBase::StartPlay()
+ANewGameModeBase::ANewGameModeBase()
 {
-    Super::StartPlay();
+	PrimaryActorTick.bCanEverTick = true;
+}
+
+void ANewGameModeBase::BeginPlay()
+{
+    Super::BeginPlay();
 
     check(GEngine != nullptr);
+}
 
-    // Display a debug message for five seconds. 
-    // The -1 "Key" value argument prevents the message from being updated or refreshed.
-    GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Hello World, this is MY GAME AHHAAHAHAH!"));
+void ANewGameModeBase::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	EnemySpawnTimer -= DeltaTime;
+
+	if (EnemySpawnTimer <= 0.0f)
+	{
+		EnemySpawnTimer = 10.0f;
+		UWorld* World = GetWorld();
+
+		if (World)
+		{
+			FVector PlayerLocation = UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetPawn()->GetActorLocation();
+
+			float randomDistance = FMath::RandRange(500.0f, 5000.0f);
+
+			FVector SpawnLocation(PlayerLocation.X + randomDistance, PlayerLocation.Y + randomDistance, PlayerLocation.Z  + 100);
+
+			FActorSpawnParameters SpawnParams;
+			ABasicEnemy* SpawnEnemyActor = World->SpawnActor<ABasicEnemy>(EnemyToSpawn, SpawnLocation, FRotator::ZeroRotator, SpawnParams);
+			if (SpawnEnemyActor)
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, FString::Printf(TEXT("Enemy Spawned")));
+			}
+			
+
+		}
+	}
 }

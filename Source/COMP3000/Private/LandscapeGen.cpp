@@ -24,19 +24,13 @@ void ALandscapeGen::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
-    APlayerController* PlayerController = UGameplayStatics::GetPlayerController(this, 0);
-
-    // Get the player pawn
-    APawn* PlayerPawn = PlayerController->GetPawn();
-
     // Get the player location
-    FVector PlayerLocation = PlayerPawn->GetActorLocation();
+    FVector PlayerLocation = UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetPawn()->GetActorLocation();
 
     FVector SpawnLocation(Current.X, Current.Y, 0.0f);
 
     Current.X = FMath::RoundToInt((PlayerLocation.X)/VertexDistance);
     Current.Y = FMath::RoundToInt((PlayerLocation.Y)/VertexDistance); 
-
 
     for (int X = -Distance; X <= Distance; X++)
     {
