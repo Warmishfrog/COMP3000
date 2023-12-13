@@ -32,16 +32,38 @@ void ABasicEnemy::BeginPlay()
 {
 	Super::BeginPlay();
 
-	BasicEnemyAIController = Cast<ABasicEnemyAIController>(GetController());
+	AController* EnemyController = GetController();
+	if (GetController() != nullptr)
+	{
+		// The enemy already has a controller
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Enemy already has a controller! REMAPPING"));
+		BasicEnemyAIController = Cast<ABasicEnemyAIController>(EnemyController);
+	}
+	else
+	{
+		// The enemy doesn't have a controller yet
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Enemy doesn't have a controller! ASSIGNING"));
+		ABasicEnemyAIController* Casted = GetWorld()->SpawnActor<ABasicEnemyAIController>(ABasicEnemyAIController::StaticClass());
+		if (Casted)
+		{
+			BasicEnemyAIController = Casted;
+			//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Successfully spawned AI controller finally"));
+		}
+		else
+		{
+			//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Failed to spawn AI controller again"));
+		}
+	}
 
 	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("basic enemy ai controller summoned")));
+	/*
 	if (BasicEnemyAIController)
 	{
 		UPathFollowingComponent* PathFollowingComp = BasicEnemyAIController->GetPathFollowingComponent();
 		if (PathFollowingComp)
 		{
 			PathFollowingComp->OnRequestFinished.AddUObject(this, &ABasicEnemy::OnAIMoveCompleted);
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("AI Move completed")));
+			//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("AI Move completed")));
 		}
 		else
 		{
@@ -54,7 +76,8 @@ void ABasicEnemy::BeginPlay()
 		// Handle case where BasicEnemyAIController is not valid
 		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("BasicEnemyAIController is NULL"));
 	}
-	//BasicEnemyAIController->GetPathFollowingComponent()->OnRequestFinished.AddUObject(this, &ABasicEnemy::OnAIMoveCompleted);
+	*/
+	BasicEnemyAIController->GetPathFollowingComponent()->OnRequestFinished.AddUObject(this, &ABasicEnemy::OnAIMoveCompleted);
 	
 	PlayerCollisionDetection->OnComponentBeginOverlap.AddDynamic(this,
 		&ABasicEnemy::OnPlayerDetectedOverlapBegin);
@@ -167,5 +190,20 @@ void ABasicEnemy::OnDealDamageOverlapBegin(UPrimitiveComponent* OverlappedComp,
 	{
 		// deal damage to player
 	}
+}
+
+float ABasicEnemy::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	float DamageCaused = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+
+	DamageCaused = FMath::Min(EnemyHealth, DamageCaused);
+	EnemyHealth -= DamageCaused;
+	UE_LOG(LogTemp, Log, TEXT("Damage amount: %f"), DamageAmount);
+	//GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, TEXT("Enemy is taking damage"));
+	if (EnemyHealth <= 0)
+	{
+		Destroy();
+	}
+	return 0.0f;
 }
 

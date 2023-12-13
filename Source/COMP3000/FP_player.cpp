@@ -141,7 +141,7 @@ float AFP_player::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent
     GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, TEXT("Player is taking damage"));
     if (Health <= 0)
     {
-        UE_LOG(LogTemp, Warning, TEXT("Dead as hell!"));
+        GEngine->AddOnScreenDebugMessage(-1, 99.f, FColor::Red, TEXT("Player is DEAD"));
 	}
     return 0.0f;
 }

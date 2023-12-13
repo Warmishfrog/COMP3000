@@ -25,6 +25,7 @@ public:
 	bool PlayerDetected;
 	bool CanAttackPlayer;
 
+	
 	UPROPERTY(BlueprintReadWrite)
 	bool CanDealDamage;
 
@@ -82,5 +83,12 @@ public:
 	void OnDealDamageOverlapBegin(class UPrimitiveComponent* OverlappedComp,
 		class AActor* OtherActor, class UPrimitiveComponent* OtherComp,
 		int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+
+	//enemy health
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
+	float EnemyHealth = 20.0f;
+	float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+
 
 };

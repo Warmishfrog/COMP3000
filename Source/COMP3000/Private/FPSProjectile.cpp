@@ -2,6 +2,8 @@
 
 
 #include "FPSProjectile.h"
+#include <BasicEnemy.h>
+#include "Engine/DamageEvents.h"
 
 // Sets default values
 AFPSProjectile::AFPSProjectile()
@@ -84,10 +86,25 @@ void AFPSProjectile::FireInDirection(const FVector& ShootDirection)
 // Function that is called when the projectile hits something.
 void AFPSProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit)
 {
-    if (OtherActor != this && OtherComponent->IsSimulatingPhysics())
+    if (OtherActor != this)
     {
-        OtherComponent->AddImpulseAtLocation(ProjectileMovementComponent->Velocity * 100.0f, Hit.ImpactPoint);
-    }
+        //if (OtherComponent->IsSimulatingPhysics())
+        {
+            //OtherComponent->AddImpulseAtLocation(ProjectileMovementComponent->Velocity * 100.0f, Hit.ImpactPoint);
+           
+
+            ABasicEnemy* HitBasicEnemy = Cast<ABasicEnemy>(OtherActor);
+            if (HitBasicEnemy)
+            {
+
+                AController* ProjectileInstigatorController = GetInstigatorController(); // Get the controller of the actor that fired the projectile
+
+                HitBasicEnemy->TakeDamage(10.0f, FDamageEvent(), ProjectileInstigatorController, this);
+                Destroy();
+
+            }
+        }
+    }    
     else {
         Destroy();
     }

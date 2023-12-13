@@ -27,7 +27,7 @@ void ABasicEnemyAIController::RandomPatrol()
         }
         else 
         {
-            UE_LOG(LogTemp, Warning, TEXT("Pawn is not valid!"));
+            GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("Pawn is Invalid"));
         }
     }
     else
