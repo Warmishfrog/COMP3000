@@ -14,6 +14,7 @@ void AFP_player::BeginPlay()
 {
 	Super::BeginPlay();
 
+    Health = 100;
 	check(GEngine != nullptr)
 }
 
@@ -21,10 +22,6 @@ void AFP_player::BeginPlay()
 void AFP_player::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-    // debug log player location
-    //FVector MyCharacter = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
-    //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Player Location: %s"), *MyCharacter.ToString()));
 
 }
 
@@ -44,9 +41,6 @@ void AFP_player::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &AFP_player::StopJump);
 	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &AFP_player::StartFiring);
     PlayerInputComponent->BindAction("Fire", IE_Released, this, &AFP_player::StopFiring);
-
-    //
-
 }
 
 void AFP_player::StartFiring()
@@ -135,5 +129,20 @@ void AFP_player::Fire()
 void AFP_player::ResetCanFire()
 {
     CanFire = true; // Set to true to allow firing again after the cooldown period
+}
+
+float AFP_player::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+    float DamageCaused = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+    
+    DamageCaused =  FMath::Min(Health, DamageCaused);
+	Health -= DamageCaused;
+    UE_LOG(LogTemp, Log, TEXT("Damage amount: %f"), DamageAmount);
+    GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, TEXT("Player is taking damage"));
+    if (Health <= 0)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("Dead as hell!"));
+	}
+    return 0.0f;
 }
 

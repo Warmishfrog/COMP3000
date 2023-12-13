@@ -15,11 +15,23 @@ void ABasicEnemyAIController::BeginPlay()
 
 void ABasicEnemyAIController::RandomPatrol()
 {
+    
     if (NavArea)
     {
-        NavArea->K2_GetRandomReachablePointInRadius(GetWorld(), GetPawn()->GetActorLocation(),
-            RandomLocation, 1500.0f);
-
-        MoveToLocation(RandomLocation);
+        APawn* ControlledPawn = GetPawn(); //error here no pawn found
+        if (ControlledPawn)
+        {
+            FVector PawnLocation = ControlledPawn->GetActorLocation();
+            NavArea->K2_GetRandomReachablePointInRadius(GetWorld(), PawnLocation, RandomLocation, 150.0f);
+            MoveToLocation(RandomLocation);
+        }
+        else 
+        {
+            UE_LOG(LogTemp, Warning, TEXT("Pawn is not valid!"));
+        }
+    }
+    else
+    {
+        UE_LOG(LogTemp, Warning, TEXT("NavArea is not valid!"));
     }
 }

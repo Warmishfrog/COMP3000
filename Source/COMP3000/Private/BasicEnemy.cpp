@@ -3,12 +3,12 @@
 #include "Components/SphereComponent.h"
 #include "Components/BoxComponent.h"
 #include "BasicEnemyAIController.h"
-#include "FindPlayerPosition.h"
-#include "FP_player_cpp.h"
 #include "Kismet/GameplayStatics.h"
 #include "Navigation/PathFollowingComponent.h"
-#include "AIController.h"
+//#include "AIController.h"
 #include "AITypes.h"
+#include "Engine/DamageEvents.h"
+#include <COMP3000/FP_player.h>
 
 // Sets default values
 ABasicEnemy::ABasicEnemy()
@@ -23,7 +23,7 @@ ABasicEnemy::ABasicEnemy()
 	PlayerAttackCollisionDetection->SetupAttachment(RootComponent);
 
 	DamageCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("Damage Collision"));
-	//DamageCollision->SetupAttachment(GetMesh(), TEXT("RightHandSocket"));
+	DamageCollision->SetupAttachment(GetMesh(), TEXT("RightHandSocket"));
 
 }
 
@@ -31,10 +31,31 @@ ABasicEnemy::ABasicEnemy()
 void ABasicEnemy::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 	BasicEnemyAIController = Cast<ABasicEnemyAIController>(GetController());
-	//BasicEnemyAIController->GetPathFollowingComponent()->OnRequestFinished.AddUObject
-	(this, &ABasicEnemy::OnAIMoveCompleted);
+
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("basic enemy ai controller summoned")));
+	if (BasicEnemyAIController)
+	{
+		UPathFollowingComponent* PathFollowingComp = BasicEnemyAIController->GetPathFollowingComponent();
+		if (PathFollowingComp)
+		{
+			PathFollowingComp->OnRequestFinished.AddUObject(this, &ABasicEnemy::OnAIMoveCompleted);
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("AI Move completed")));
+		}
+		else
+		{
+			// Handle case where PathFollowingComponent is not valid
+			GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("PathFollowingComponent is NULL"));
+		}
+	}
+	else
+	{
+		// Handle case where BasicEnemyAIController is not valid
+		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("BasicEnemyAIController is NULL"));
+	}
+	//BasicEnemyAIController->GetPathFollowingComponent()->OnRequestFinished.AddUObject(this, &ABasicEnemy::OnAIMoveCompleted);
+	
 	PlayerCollisionDetection->OnComponentBeginOverlap.AddDynamic(this,
 		&ABasicEnemy::OnPlayerDetectedOverlapBegin);
 
@@ -60,18 +81,26 @@ void ABasicEnemy::OnAIMoveCompleted(FAIRequestID RequestID, const FPathFollowing
 		StopSeekingPlayer();
 
 		// attack player
-		UE_LOG(LogTemp, Warning, TEXT("Player ATTACKED"));
+		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("Enemy is attacking"));
+		UGameplayStatics::GetPlayerCharacter(GetWorld(), 0)->TakeDamage(10.0f, FDamageEvent(), BasicEnemyAIController, this);
 	}
-	else if (PlayerDetected)
+	if (!PlayerDetected)
 	{
-		MoveToPlayer();
+		BasicEnemyAIController->RandomPatrol();
 	}
 }
 
 void ABasicEnemy::MoveToPlayer()
 {
 	FVector PlayerLocation = UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetPawn()->GetActorLocation();
-	BasicEnemyAIController->MoveToLocation(PlayerLocation, StoppingDistance, true); //crashes game question mark
+	if (BasicEnemyAIController)
+	{
+		BasicEnemyAIController->MoveToLocation(PlayerLocation, StoppingDistance, true);
+	}
+	else 
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("BasicEnemyAIController is NULL"));
+	}
 }
 
 void ABasicEnemy::SeekPlayer()
@@ -90,18 +119,25 @@ void ABasicEnemy::OnPlayerDetectedOverlapBegin(UPrimitiveComponent* OverlappedCo
 	AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
 	bool bFromSweep, const FHitResult& SweepResult)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Blue, FString::Printf(TEXT("AI ping 1")));
-	
 	if (OtherActor == UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Blue, FString::Printf(TEXT("AI ping 2")));
+		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Green, FString::Printf(TEXT("AI detected player")));
 
 		PlayerDetected = true;
 		SeekPlayer();
 	}
-	
 }
 
+void ABasicEnemy::OnPlayerDetectedOverlapEnd(UPrimitiveComponent* OverlappedComp,
+	AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	if (OtherActor == UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))
+	{
+		PlayerDetected = false;
+		StopSeekingPlayer();
+		BasicEnemyAIController->RandomPatrol();
+	}
+}
 
 void ABasicEnemy::OnPlayerAttackOverlapBegin(UPrimitiveComponent* OverlappedComp,
 	AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
@@ -130,7 +166,6 @@ void ABasicEnemy::OnDealDamageOverlapBegin(UPrimitiveComponent* OverlappedComp,
 	if (OtherActor == UGameplayStatics::GetPlayerCharacter(GetWorld(), 0) && CanDealDamage)
 	{
 		// deal damage to player
-		UE_LOG(LogTemp, Warning, TEXT("Player Damaged"));
 	}
 }
 

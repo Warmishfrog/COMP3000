@@ -340,6 +340,10 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_MuzzleOffset_MetaData[];
 #endif
 		static const UECodeGen_Private::FStructPropertyParams NewProp_MuzzleOffset;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Health_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_Health;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -393,9 +397,23 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 	};
 #endif
 	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_MuzzleOffset = { "MuzzleOffset", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, MuzzleOffset), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_MuzzleOffset_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_MuzzleOffset_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_Health_MetaData[] = {
+		{ "Category", "Gameplay" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//health\n" },
+#endif
+		{ "ModuleRelativePath", "FP_player.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "health" },
+#endif
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_Health = { "Health", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, Health), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_Health_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_Health_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AFP_player_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_ProjectileClass,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_MuzzleOffset,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_Health,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AFP_player_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AFP_player>::IsAbstract,
@@ -435,9 +453,9 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_FP_player_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AFP_player, AFP_player::StaticClass, TEXT("AFP_player"), &Z_Registration_Info_UClass_AFP_player, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFP_player), 2309779465U) },
+		{ Z_Construct_UClass_AFP_player, AFP_player::StaticClass, TEXT("AFP_player"), &Z_Registration_Info_UClass_AFP_player, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFP_player), 672056032U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_FP_player_h_2013236780(TEXT("/Script/COMP3000"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_FP_player_h_828438234(TEXT("/Script/COMP3000"),
 		Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_FP_player_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_FP_player_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

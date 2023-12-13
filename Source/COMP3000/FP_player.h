@@ -62,15 +62,27 @@ public:
 	UFUNCTION()
 	void StopJump();
 
-	// Function that handles firing projectiles.
-	UFUNCTION()
-	void Fire();
 
-	UFUNCTION()
-	void ResetCanFire();
+	//shooting
+	
+		// Function that handles firing projectiles.
+		UFUNCTION()
+		void Fire();
 
-	// Gun muzzle offset from the camera location.
+		UFUNCTION()
+		void ResetCanFire();
+
+
+		// Gun muzzle offset from the camera location.
+		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
+		FVector MuzzleOffset;
+	
+
+	//health
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
-	FVector MuzzleOffset;
+	float  Health = 100;
+
+	float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+
 
 };

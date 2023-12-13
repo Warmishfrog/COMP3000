@@ -20,5 +20,5 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "Spawn")
 	TSubclassOf<class ABasicEnemy> EnemyToSpawn;
 
-	float EnemySpawnTimer = 5.0f;
+	float EnemySpawnTimer;
 };

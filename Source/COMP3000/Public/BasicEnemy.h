@@ -36,7 +36,6 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	class UBoxComponent* DamageCollision;
-
 	//
 	class ABasicEnemyAIController* BasicEnemyAIController;
 
@@ -65,6 +64,11 @@ public:
 		int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	UFUNCTION()
+	void OnPlayerDetectedOverlapEnd(class UPrimitiveComponent* OverlappedComp,
+		class AActor* OtherActor, class UPrimitiveComponent* OtherComp,
+		int32 OtherBodyIndex);
+
+	UFUNCTION()
 	void OnPlayerAttackOverlapBegin(class UPrimitiveComponent* OverlappedComp,
 		class AActor* OtherActor, class UPrimitiveComponent* OtherComp,
 		int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
@@ -78,4 +82,5 @@ public:
 	void OnDealDamageOverlapBegin(class UPrimitiveComponent* OverlappedComp,
 		class AActor* OtherActor, class UPrimitiveComponent* OtherComp,
 		int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
 };
