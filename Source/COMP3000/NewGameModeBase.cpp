@@ -24,66 +24,69 @@ void ANewGameModeBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	EnemySpawnTimer -= DeltaTime;
+	if (CombatStarted) {
 
-	
-	if (EnemySpawnTimer <= 0.0f)
-	{
-		EnemySpawnTimer = 3.0f;
-		UWorld* World = GetWorld();
+		EnemySpawnTimer -= DeltaTime;
 
-		if (World)
+
+		if (EnemySpawnTimer <= 0.0f)
 		{
-			FVector PlayerLocation = UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetPawn()->GetActorLocation();
+			EnemySpawnTimer = 3.0f;
+			UWorld* World = GetWorld();
 
-			float DistanceLimitHigh = 5000.0f;
-			float DistanceLimitLow = 1000.0f;
-
-			float randomDistanceX = FMath::RandRange(DistanceLimitLow, DistanceLimitHigh);
-			float randomDistanceY = FMath::RandRange(DistanceLimitLow, DistanceLimitHigh); //sqrt(pow((FMath::RandRange(DistanceLimitLow, DistanceLimitHigh)), 2) - pow(randomDistanceX, 2));
-
-			int Quadrant = FMath::RandRange(1, 4);
-			switch (Quadrant)
+			if (World)
 			{
-			case 2:
-				randomDistanceX = -randomDistanceX;
-				break;
+				FVector PlayerLocation = UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetPawn()->GetActorLocation();
 
-			case 3:
-				randomDistanceX = -randomDistanceX;
-				randomDistanceY = -randomDistanceY;
-				break;
+				float DistanceLimitHigh = 5000.0f;
+				float DistanceLimitLow = 1000.0f;
 
-			case 4:
-				randomDistanceY = -randomDistanceY;
-				break;
-			}
+				float randomDistanceX = FMath::RandRange(DistanceLimitLow, DistanceLimitHigh);
+				float randomDistanceY = FMath::RandRange(DistanceLimitLow, DistanceLimitHigh); //sqrt(pow((FMath::RandRange(DistanceLimitLow, DistanceLimitHigh)), 2) - pow(randomDistanceX, 2));
 
-			FVector SpawnLocation(PlayerLocation.X + randomDistanceX, PlayerLocation.Y + randomDistanceY, PlayerLocation.Z  + 100);
-			GEngine->AddOnScreenDebugMessage(-1, 120.0f, FColor::Yellow, FString::Printf(TEXT("X: %f, Y: %f"), SpawnLocation.X, SpawnLocation.Y)); FActorSpawnParameters SpawnParams;
-
-
-			ABasicEnemyAIController* EnemyAIController = World->SpawnActor<ABasicEnemyAIController>(ABasicEnemyAIController::StaticClass(), FTransform::Identity);
-			ABasicEnemy* SpawnEnemyActor = World->SpawnActor<ABasicEnemy>(EnemyToSpawn, SpawnLocation, FRotator::ZeroRotator, SpawnParams);
-			if (SpawnEnemyActor)
-			{				
-				//GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, FString::Printf(TEXT("Enemy Spawned")));
-				//ABasicEnemyAIController* EnemyAIController = World->SpawnActor<ABasicEnemyAIController>(ABasicEnemyAIController::StaticClass(), FTransform::Identity);
-				if (EnemyAIController)
+				int Quadrant = FMath::RandRange(1, 4);
+				switch (Quadrant)
 				{
-					//EnemyAIController->Possess(SpawnEnemyActor);
-					GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, FString::Printf(TEXT("Enemy Possessed")));
+				case 2:
+					randomDistanceX = -randomDistanceX;
+					break;
+
+				case 3:
+					randomDistanceX = -randomDistanceX;
+					randomDistanceY = -randomDistanceY;
+					break;
+
+				case 4:
+					randomDistanceY = -randomDistanceY;
+					break;
+				}
+
+				FVector SpawnLocation(PlayerLocation.X + randomDistanceX, PlayerLocation.Y + randomDistanceY, PlayerLocation.Z + 100);
+				GEngine->AddOnScreenDebugMessage(-1, 120.0f, FColor::Yellow, FString::Printf(TEXT("X: %f, Y: %f"), SpawnLocation.X, SpawnLocation.Y)); FActorSpawnParameters SpawnParams;
+
+
+				ABasicEnemyAIController* EnemyAIController = World->SpawnActor<ABasicEnemyAIController>(ABasicEnemyAIController::StaticClass(), FTransform::Identity);
+				ABasicEnemy* SpawnEnemyActor = World->SpawnActor<ABasicEnemy>(EnemyToSpawn, SpawnLocation, FRotator::ZeroRotator, SpawnParams);
+				if (SpawnEnemyActor)
+				{
+					//GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, FString::Printf(TEXT("Enemy Spawned")));
+					//ABasicEnemyAIController* EnemyAIController = World->SpawnActor<ABasicEnemyAIController>(ABasicEnemyAIController::StaticClass(), FTransform::Identity);
+					if (EnemyAIController)
+					{
+						//EnemyAIController->Possess(SpawnEnemyActor);
+						GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, FString::Printf(TEXT("Enemy Possessed")));
+					}
+					else
+					{
+						GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("Failed to spawn AI Controller"));
+					}
 				}
 				else
 				{
-					GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("Failed to spawn AI Controller"));
+					GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("Failed to spawn Enemy"));
 				}
-			}
-			else
-			{
-				GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("Failed to spawn Enemy"));
-			}		
 
+			}
 		}
 	}
 	
