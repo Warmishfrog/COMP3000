@@ -73,6 +73,7 @@
 /DBUILD_VERSION=++UE5+Release-5.3-CL-29314046
 /DBUILD_ICON_FILE_NAME="\"..\\Build\\Windows\\Resources\\Default.ico\""
 /DPROJECT_COPYRIGHT_STRING="Fill out your copyright notice in the Description page of Project Settings."
+/DPROJECT_PRODUCT_NAME="Under the Crescent Moon"
 /DPROJECT_PRODUCT_IDENTIFIER=COMP3000
 /fo "E:\workspace\comp3000\COMP3000\Intermediate\Build\Win64\x64\UnrealEditor\Development\COMP3000\Default.rc2.res"
 "..\Build\Windows\Resources\Default.rc2"

@@ -18,8 +18,11 @@ public:
 	ANewGameModeBase();
 
 	UPROPERTY(EditDefaultsOnly, Category = "Spawn")
-	TSubclassOf<class ABasicEnemy> EnemyToSpawn;
-	bool CombatStarted = false;
+		TSubclassOf<class ABasicEnemy> EnemyToSpawn;
+
+	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = "true"), Category = "Spawn")
+		bool CombatStarted = false;
 
 	float EnemySpawnTimer;
+	float EnemySpawnIncrease;
 };

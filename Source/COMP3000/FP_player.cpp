@@ -14,7 +14,19 @@ void AFP_player::BeginPlay()
 {
 	Super::BeginPlay();
 
+    //starting player stats
     Health = 100;
+    XP = 0;
+    XPToLevel = 25.0f;
+    Level = 0;
+    FireRate = 0.25f;
+    CanFire = true;
+    bIsFiring = false;
+    MuzzleOffset = FVector(100.0f, 0.0f, 0.0f);
+    ProjectileClass = AFPSProjectile::StaticClass();
+
+
+
 	check(GEngine != nullptr)
 }
 
@@ -144,5 +156,25 @@ float AFP_player::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent
         GEngine->AddOnScreenDebugMessage(-1, 99.f, FColor::Red, TEXT("Player is DEAD"));
 	}
     return 0.0f;
+}
+
+void AFP_player::GainXP(float XPAmount)
+{
+    XP += XPAmount;
+    GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, FString::Printf(TEXT("Player gained %f XP"), XPAmount));
+    GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, FString::Printf(TEXT("Player has %f XP"), XP));
+	if (XP >= XPToLevel)
+	{
+		LevelUp();
+	}
+}
+
+void AFP_player::LevelUp()
+{
+    Level++;
+    XP -= XPToLevel;
+    XPToLevel *= 1.5f;
+    LevelUpTRIGGER();
+	//GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, FString::Printf(TEXT("Player leveled up to level %d"), Level));
 }
 

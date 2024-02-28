@@ -49,34 +49,7 @@ void ABasicEnemy::BeginPlay()
 			BasicEnemyAIController = Casted;
 			//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Successfully spawned AI controller finally"));
 		}
-		else
-		{
-			//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Failed to spawn AI controller again"));
-		}
 	}
-
-	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("basic enemy ai controller summoned")));
-	/*
-	if (BasicEnemyAIController)
-	{
-		UPathFollowingComponent* PathFollowingComp = BasicEnemyAIController->GetPathFollowingComponent();
-		if (PathFollowingComp)
-		{
-			PathFollowingComp->OnRequestFinished.AddUObject(this, &ABasicEnemy::OnAIMoveCompleted);
-			//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("AI Move completed")));
-		}
-		else
-		{
-			// Handle case where PathFollowingComponent is not valid
-			GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("PathFollowingComponent is NULL"));
-		}
-	}
-	else
-	{
-		// Handle case where BasicEnemyAIController is not valid
-		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("BasicEnemyAIController is NULL"));
-	}
-	*/
 	BasicEnemyAIController->GetPathFollowingComponent()->OnRequestFinished.AddUObject(this, &ABasicEnemy::OnAIMoveCompleted);
 	
 	PlayerCollisionDetection->OnComponentBeginOverlap.AddDynamic(this,
@@ -104,7 +77,7 @@ void ABasicEnemy::OnAIMoveCompleted(FAIRequestID RequestID, const FPathFollowing
 		StopSeekingPlayer();
 
 		// attack player
-		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("Enemy is attacking"));
+		//GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Yellow, TEXT("Enemy is attacking"));
 		UGameplayStatics::GetPlayerCharacter(GetWorld(), 0)->TakeDamage(10.0f, FDamageEvent(), BasicEnemyAIController, this);
 	}
 	if (!PlayerDetected)
@@ -144,7 +117,7 @@ void ABasicEnemy::OnPlayerDetectedOverlapBegin(UPrimitiveComponent* OverlappedCo
 {
 	if (OtherActor == UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Green, FString::Printf(TEXT("AI detected player")));
+		//GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Green, FString::Printf(TEXT("AI detected player")));
 
 		PlayerDetected = true;
 		SeekPlayer();
@@ -202,6 +175,15 @@ float ABasicEnemy::TakeDamage(float DamageAmount, FDamageEvent const& DamageEven
 	//GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, TEXT("Enemy is taking damage"));
 	if (EnemyHealth <= 0)
 	{
+		// Award XP to the player
+		if (EventInstigator && EventInstigator->GetPawn())
+		{
+			AFP_player* PlayerPawn = Cast<AFP_player>(EventInstigator->GetPawn());
+			if (PlayerPawn)
+			{
+				PlayerPawn->GainXP(FMath::RandRange(1, 3)); //amount of XP gained
+			}
+		}
 		Destroy();
 	}
 	return 0.0f;

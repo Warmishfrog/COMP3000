@@ -27,7 +27,7 @@ void ABasicEnemyAIController::RandomPatrol()
         }
         else 
         {
-            GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("Pawn is Invalid"));
+            //GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("Pawn is Invalid"));
         }
     }
     else

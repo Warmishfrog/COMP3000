@@ -17,12 +17,17 @@ void ANewGameModeBase::BeginPlay()
 {
     Super::BeginPlay();
 
+
+	CombatStarted = true; //debug
+	EnemySpawnIncrease = 1.0f;
+
     check(GEngine != nullptr);
 }
 
 void ANewGameModeBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
 
 	if (CombatStarted) {
 
@@ -31,7 +36,7 @@ void ANewGameModeBase::Tick(float DeltaTime)
 
 		if (EnemySpawnTimer <= 0.0f)
 		{
-			EnemySpawnTimer = 3.0f;
+			EnemySpawnTimer = 3.0 * EnemySpawnIncrease;
 			UWorld* World = GetWorld();
 
 			if (World)
@@ -62,11 +67,14 @@ void ANewGameModeBase::Tick(float DeltaTime)
 				}
 
 				FVector SpawnLocation(PlayerLocation.X + randomDistanceX, PlayerLocation.Y + randomDistanceY, PlayerLocation.Z + 100);
-				GEngine->AddOnScreenDebugMessage(-1, 120.0f, FColor::Yellow, FString::Printf(TEXT("X: %f, Y: %f"), SpawnLocation.X, SpawnLocation.Y)); FActorSpawnParameters SpawnParams;
+				//GEngine->AddOnScreenDebugMessage(-1, 120.0f, FColor::Yellow, FString::Printf(TEXT("X: %f, Y: %f"), SpawnLocation.X, SpawnLocation.Y));
+				FActorSpawnParameters SpawnParams;
 
 
 				ABasicEnemyAIController* EnemyAIController = World->SpawnActor<ABasicEnemyAIController>(ABasicEnemyAIController::StaticClass(), FTransform::Identity);
 				ABasicEnemy* SpawnEnemyActor = World->SpawnActor<ABasicEnemy>(EnemyToSpawn, SpawnLocation, FRotator::ZeroRotator, SpawnParams);
+				EnemySpawnIncrease -= 0.0075;
+				/*
 				if (SpawnEnemyActor)
 				{
 					//GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, FString::Printf(TEXT("Enemy Spawned")));
@@ -74,17 +82,18 @@ void ANewGameModeBase::Tick(float DeltaTime)
 					if (EnemyAIController)
 					{
 						//EnemyAIController->Possess(SpawnEnemyActor);
-						GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, FString::Printf(TEXT("Enemy Possessed")));
+						//GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, FString::Printf(TEXT("Enemy Possessed")));
 					}
 					else
 					{
-						GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("Failed to spawn AI Controller"));
+						//GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("Failed to spawn AI Controller"));
 					}
 				}
 				else
 				{
-					GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("Failed to spawn Enemy"));
+					//GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("Failed to spawn Enemy"));
 				}
+				*/
 
 			}
 		}

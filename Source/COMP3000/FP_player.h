@@ -6,7 +6,6 @@
 #include "TimerManager.h"
 #include "FP_player.generated.h"
 
-
 UCLASS()
 class COMP3000_API AFP_player : public ACharacter
 {
@@ -84,5 +83,22 @@ public:
 
 	float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
 
+	//XP
+	UFUNCTION(BlueprintCallable, Category = "XP")
+	void GainXP(float XPAmount);
 
+	UFUNCTION(BlueprintCallable, Category = "XP")
+	void LevelUp();
+
+	UFUNCTION(BlueprintCallable, Category = "XP", BlueprintImplementableEvent)
+	void LevelUpTRIGGER();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "XP")
+		float XP;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "XP")
+		int XPToLevel;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "XP")
+		int Level;
 };
