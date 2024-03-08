@@ -5,6 +5,7 @@
 UUpgradeComponent::UUpgradeComponent()
 {	
 	//pee pee poo poo
+    
 }
 
 void UUpgradeComponent::BeginPlay()
@@ -15,6 +16,7 @@ void UUpgradeComponent::BeginPlay()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("UpgradeDataTable is not set!"));
 	}
+
 }
 
 
@@ -108,7 +110,7 @@ TArray<FName> UUpgradeComponent::FindThreeUpgrades()
         UE_LOG(LogTemp, Warning, TEXT("UpgradeDataTable is not set"));
     }
 
-    return SelectedUpgradeNames;
+    return SelectedUpgradeRowName;
 }
 
 

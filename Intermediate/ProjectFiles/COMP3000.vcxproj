@@ -112,7 +112,6 @@
     <None Include="..\..\.vsconfig"/>
     <None Include="..\..\COMP3000.png"/>
     <None Include="..\..\Config\DefaultEditor.ini"/>
-    <None Include="..\..\Config\DefaultEngine.ini"/>
     <None Include="..\..\Config\DefaultGame.ini"/>
     <None Include="..\..\Config\DefaultInput.ini"/>
     <None Include="..\..\Source\COMP3000\COMP3000.Build.cs"/>

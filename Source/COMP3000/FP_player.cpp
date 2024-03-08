@@ -5,9 +5,27 @@
 AFP_player::AFP_player()
 {
 	PrimaryActorTick.bCanEverTick = true;
+    
+    
+    PlayerUpgradeComponent = CreateDefaultSubobject<UUpgradeComponent>(TEXT("Player Upgrades C++")); // add component to player    
+    if (!PlayerUpgradeComponent)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("UpgradeComponent is not set!"));
+    }
+    else
+    {
+        UE_LOG(LogTemp, Warning, TEXT("UpgradeComponent is set!"));
 
-    UpgradeComponent = CreateDefaultSubobject<UUpgradeComponent>(TEXT("Player Upgrades")); // add component to player
-
+        PlayerUpgradeComponent->UpgradeDataTable = LoadObject<UDataTable>(nullptr, TEXT("/Game/UpgradeDataTable"));
+        if (!PlayerUpgradeComponent->UpgradeDataTable)
+        {
+            UE_LOG(LogTemp, Warning, TEXT("UpgradeComponent is not set!"));
+        }
+        else
+        {
+            UE_LOG(LogTemp, Warning, TEXT("UpgradeComponent is set!"));
+        }
+    }
 }
 
 void AFP_player::BeginPlay()
@@ -17,7 +35,7 @@ void AFP_player::BeginPlay()
     //starting player stats
     Health = 100;
     XP = 0;
-    XPToLevel = 5.0f;
+    XPToLevel = 3.0f;
     Level = 0;
     FireRate = 0.25f;
     CanFire = true;
@@ -25,6 +43,11 @@ void AFP_player::BeginPlay()
     MuzzleOffset = FVector(100.0f, 0.0f, 0.0f);
     ProjectileClass = AFPSProjectile::StaticClass();
 
+    for (int32 i = 0; i < 3; ++i)
+    {
+        CurrentThreeUpgrades.Add(TEXT("Null Upgrade"));
+    }
+    PlayerUpgradeComponent->UnlockedUpgrades.Empty(); //wipe the map clean before starting;
 
 
 
@@ -175,7 +198,7 @@ void AFP_player::LevelUp()
     XP -= XPToLevel;
     XPToLevel *= 1.5f;
 
-    CurrentThreeUpgrades = UpgradeComponent->FindThreeUpgrades();
+    CurrentThreeUpgrades = PlayerUpgradeComponent->FindThreeUpgrades();
 
     // Output the selected upgrade names to the console
     for (const FName& UpgradeName : CurrentThreeUpgrades)

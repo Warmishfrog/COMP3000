@@ -103,10 +103,15 @@ public:
 		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "XP")
 			int Level = 0;
 
-		UPROPERTY(VisibleAnywhere)
-		class UUpgradeComponent* UpgradeComponent;
+			
+		UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+		class UUpgradeComponent* PlayerUpgradeComponent; //ue5 bug for editing component 
+		
 
-		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "XP")
+		UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TArray<FName> CurrentThreeUpgrades;
 
+
+		UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FUpgradeData TempRow;
 };

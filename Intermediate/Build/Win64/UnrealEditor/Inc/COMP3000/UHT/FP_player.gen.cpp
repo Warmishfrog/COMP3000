@@ -6,6 +6,7 @@
 
 #include "UObject/GeneratedCppIncludes.h"
 #include "COMP3000/FP_player.h"
+#include "COMP3000/Public/UpgradeComponent.h"
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 // Cross Module References
@@ -13,6 +14,7 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 	COMP3000_API UClass* Z_Construct_UClass_AFP_player_NoRegister();
 	COMP3000_API UClass* Z_Construct_UClass_AFPSProjectile_NoRegister();
 	COMP3000_API UClass* Z_Construct_UClass_UUpgradeComponent_NoRegister();
+	COMP3000_API UScriptStruct* Z_Construct_UScriptStruct_FUpgradeData();
 	COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
 	ENGINE_API UClass* Z_Construct_UClass_ACharacter();
@@ -467,14 +469,18 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 #endif
 		static const UECodeGen_Private::FIntPropertyParams NewProp_Level;
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_UpgradeComponent_MetaData[];
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_PlayerUpgradeComponent_MetaData[];
 #endif
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_UpgradeComponent;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_PlayerUpgradeComponent;
 		static const UECodeGen_Private::FNamePropertyParams NewProp_CurrentThreeUpgrades_Inner;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_CurrentThreeUpgrades_MetaData[];
 #endif
 		static const UECodeGen_Private::FArrayPropertyParams NewProp_CurrentThreeUpgrades;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_TempRow_MetaData[];
+#endif
+		static const UECodeGen_Private::FStructPropertyParams NewProp_TempRow;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -572,21 +578,34 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 #endif
 	const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_Level = { "Level", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, Level), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_Level_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_Level_MetaData) };
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_UpgradeComponent_MetaData[] = {
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_PlayerUpgradeComponent_MetaData[] = {
 		{ "Category", "FP_player" },
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "FP_player.h" },
 	};
 #endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_UpgradeComponent = { "UpgradeComponent", nullptr, (EPropertyFlags)0x00100000000a0009, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, UpgradeComponent), Z_Construct_UClass_UUpgradeComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_UpgradeComponent_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_UpgradeComponent_MetaData) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_PlayerUpgradeComponent = { "PlayerUpgradeComponent", nullptr, (EPropertyFlags)0x00100000000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, PlayerUpgradeComponent), Z_Construct_UClass_UUpgradeComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_PlayerUpgradeComponent_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_PlayerUpgradeComponent_MetaData) };
 	const UECodeGen_Private::FNamePropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_CurrentThreeUpgrades_Inner = { "CurrentThreeUpgrades", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, METADATA_PARAMS(0, nullptr) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_CurrentThreeUpgrades_MetaData[] = {
-		{ "Category", "XP" },
+		{ "Category", "FP_player" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//ue5 bug for editing component \n" },
+#endif
 		{ "ModuleRelativePath", "FP_player.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "ue5 bug for editing component" },
+#endif
 	};
 #endif
 	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_CurrentThreeUpgrades = { "CurrentThreeUpgrades", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, CurrentThreeUpgrades), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_CurrentThreeUpgrades_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_CurrentThreeUpgrades_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_TempRow_MetaData[] = {
+		{ "Category", "FP_player" },
+		{ "ModuleRelativePath", "FP_player.h" },
+	};
+#endif
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_TempRow = { "TempRow", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, TempRow), Z_Construct_UScriptStruct_FUpgradeData, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_TempRow_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_TempRow_MetaData) }; // 2271792410
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AFP_player_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_ProjectileClass,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_MuzzleOffset,
@@ -594,9 +613,10 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_XP,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_XPToLevel,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_Level,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_UpgradeComponent,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_PlayerUpgradeComponent,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_CurrentThreeUpgrades_Inner,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_CurrentThreeUpgrades,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_TempRow,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AFP_player_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AFP_player>::IsAbstract,
@@ -636,9 +656,9 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_FP_player_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AFP_player, AFP_player::StaticClass, TEXT("AFP_player"), &Z_Registration_Info_UClass_AFP_player, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFP_player), 2973905754U) },
+		{ Z_Construct_UClass_AFP_player, AFP_player::StaticClass, TEXT("AFP_player"), &Z_Registration_Info_UClass_AFP_player, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFP_player), 3460663092U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_FP_player_h_4012323992(TEXT("/Script/COMP3000"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_FP_player_h_3517571229(TEXT("/Script/COMP3000"),
 		Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_FP_player_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_FP_player_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

@@ -33,9 +33,7 @@ class COMP3000_API UUpgradeComponent : public UActorComponent
 	GENERATED_BODY()
 
 public:	
-	// Sets default values for this component's properties
 	UUpgradeComponent();
-
     
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     FUpgradeData UpgradeInfo;
