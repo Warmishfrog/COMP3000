@@ -12,6 +12,7 @@
       <Filter>Source</Filter>
     </None>
     <None Include="..\..\.vsconfig" />
+    <None Include="..\..\COMP3000.png" />
     <Filter Include="Config">
       <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
     </Filter>
@@ -78,6 +79,9 @@
     <ClCompile Include="..\..\Source\COMP3000\Private\LandscapeGen.cpp">
       <Filter>Source\COMP3000\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\COMP3000\Private\UpgradeComponent.cpp">
+      <Filter>Source\COMP3000\Private</Filter>
+    </ClCompile>
     <Filter Include="Source\COMP3000\Public">
       <UniqueIdentifier>{B84C98E3-8ED6-3D90-97A2-42B49C2BCC3F}</UniqueIdentifier>
     </Filter>
@@ -103,6 +107,9 @@
       <Filter>Source\COMP3000\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\COMP3000\Public\LandscapeGen.h">
+      <Filter>Source\COMP3000\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\COMP3000\Public\UpgradeComponent.h">
       <Filter>Source\COMP3000\Public</Filter>
     </ClInclude>
   </ItemGroup>

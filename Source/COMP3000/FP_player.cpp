@@ -1,15 +1,15 @@
 
 #include "FP_player.h"
+#include <Kismet/GameplayStatics.h>
 
-// Sets default values
 AFP_player::AFP_player()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+    UpgradeComponent = CreateDefaultSubobject<UUpgradeComponent>(TEXT("Player Upgrades")); // add component to player
 
 }
 
-// Called when the game starts or when spawned
 void AFP_player::BeginPlay()
 {
 	Super::BeginPlay();
@@ -17,7 +17,7 @@ void AFP_player::BeginPlay()
     //starting player stats
     Health = 100;
     XP = 0;
-    XPToLevel = 25.0f;
+    XPToLevel = 5.0f;
     Level = 0;
     FireRate = 0.25f;
     CanFire = true;
@@ -27,14 +27,13 @@ void AFP_player::BeginPlay()
 
 
 
+
 	check(GEngine != nullptr)
 }
 
-// Called every frame
 void AFP_player::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
@@ -122,16 +121,16 @@ void AFP_player::Fire()
 
             if (CanFire)
             {
-                // Spawn the projectile at the muzzle.
+                // spawn from muzzle
                 AFPSProjectile* Projectile = World->SpawnActor<AFPSProjectile>(ProjectileClass, MuzzleLocation, MuzzleRotation, SpawnParams);
                 if (Projectile)
                 {
-                    // Set the projectile's initial trajectory.
+                    //initial trajectory.
                     FVector LaunchDirection = MuzzleRotation.Vector();
                     Projectile->FireInDirection(LaunchDirection);
                 }
 
-                CanFire = false; // Set to false to prevent firing during the cooldown period
+                CanFire = false; // start of cooldown period
                 GetWorldTimerManager().SetTimer(FireRateTimerHandle, this, &AFP_player::ResetCanFire, FireRate, false);
             }
         }
@@ -140,7 +139,7 @@ void AFP_player::Fire()
 
 void AFP_player::ResetCanFire()
 {
-    CanFire = true; // Set to true to allow firing again after the cooldown period
+    CanFire = true; // end of cooldown period
 }
 
 float AFP_player::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
@@ -149,11 +148,12 @@ float AFP_player::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent
     
     DamageCaused =  FMath::Min(Health, DamageCaused);
 	Health -= DamageCaused;
-    UE_LOG(LogTemp, Log, TEXT("Damage amount: %f"), DamageAmount);
+    //UE_LOG(LogTemp, Log, TEXT("Damage amount: %f"), DamageAmount);
     GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, TEXT("Player is taking damage"));
     if (Health <= 0)
     {
         GEngine->AddOnScreenDebugMessage(-1, 99.f, FColor::Red, TEXT("Player is DEAD"));
+        UGameplayStatics::OpenLevel(GetWorld(), FName("Menu")); //temp fix //change this later to be more smooth
 	}
     return 0.0f;
 }
@@ -161,8 +161,8 @@ float AFP_player::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent
 void AFP_player::GainXP(float XPAmount)
 {
     XP += XPAmount;
-    GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, FString::Printf(TEXT("Player gained %f XP"), XPAmount));
-    GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, FString::Printf(TEXT("Player has %f XP"), XP));
+        //GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, FString::Printf(TEXT("Player gained %f XP"), XPAmount));
+        //GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, FString::Printf(TEXT("Player has %f XP"), XP));
 	if (XP >= XPToLevel)
 	{
 		LevelUp();
@@ -174,7 +174,18 @@ void AFP_player::LevelUp()
     Level++;
     XP -= XPToLevel;
     XPToLevel *= 1.5f;
-    LevelUpTRIGGER();
-	//GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, FString::Printf(TEXT("Player leveled up to level %d"), Level));
+
+    CurrentThreeUpgrades = UpgradeComponent->FindThreeUpgrades();
+
+    // Output the selected upgrade names to the console
+    for (const FName& UpgradeName : CurrentThreeUpgrades)
+    {
+        FString UpgradeNameString = UpgradeName.ToString();
+        UE_LOG(LogTemp, Warning, TEXT("Selected Upgrade Name : %s"), *UpgradeNameString);
+    }
+
+    LevelUpTRIGGER(); //event trigger for blueprint
+	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, FString::Printf(TEXT("Player leveled up to level %d"), Level));
+   
 }
 
