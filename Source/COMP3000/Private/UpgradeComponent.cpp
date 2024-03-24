@@ -4,8 +4,7 @@
 // Sets default values for this component's properties
 UUpgradeComponent::UUpgradeComponent()
 {	
-	//pee pee poo poo
-    
+	//pee pee poo poo    
 }
 
 void UUpgradeComponent::BeginPlay()
@@ -20,7 +19,6 @@ void UUpgradeComponent::BeginPlay()
 }
 
 
-
 void UUpgradeComponent::AddUpgrade(const FString& UpgradeName, int32 UpgradeKey)
 {
 	if (UnlockedUpgrades.Contains(UpgradeName))
@@ -30,6 +28,8 @@ void UUpgradeComponent::AddUpgrade(const FString& UpgradeName, int32 UpgradeKey)
 		if (TierPtr)
 		{
 			*TierPtr += 1;
+            //ue log for upgrade name and tier
+            UE_LOG(LogTemp, Warning, TEXT("Upgrade %s is now at tier %d"), *UpgradeName, *TierPtr);
 		}
 	}
 	else
@@ -48,6 +48,7 @@ int32 UUpgradeComponent::QueryUpgrade(const FString& UpgradeName)
 		int32* TierPtr = UnlockedUpgrades.Find(UpgradeName);
 		if (TierPtr)
 		{
+            UE_LOG(LogTemp, Warning, TEXT("Upgrade %s is currently at tier %d"), *UpgradeName, *TierPtr);
 			return *TierPtr;
 		}
 	}

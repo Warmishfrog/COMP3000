@@ -1,12 +1,23 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 
 #include "FPSProjectile.h"
 #include <BasicEnemy.h>
 #include "Engine/DamageEvents.h"
 
 // Sets default values
-AFPSProjectile::AFPSProjectile()
+AFPSProjectile::AFPSProjectile(/*
+    const FObjectInitializer& ObjectInitializer,
+    float Damage,
+    float CollisionRadius,
+    float ProjectileScale,
+    float InitialSpeed,
+    float MaxSpeed,
+    float LifeSpan,
+    bool bShouldBounce,
+    float Bounciness,
+    float ExplosionRadius,
+    int PierceCount
+    /**/
+)//: AActor(ObjectInitializer)
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -25,7 +36,7 @@ AFPSProjectile::AFPSProjectile()
         // Event called when component hits something.
         CollisionComponent->OnComponentHit.AddDynamic(this, &AFPSProjectile::OnHit);
         // Set the sphere's collision radius.
-        CollisionComponent->InitSphereRadius(15.0f);
+        CollisionComponent->InitSphereRadius(CollisionRadius);
         // Set the root component to be the collision component.
         RootComponent = CollisionComponent;
     }
@@ -35,12 +46,12 @@ AFPSProjectile::AFPSProjectile()
         // Use this component to drive this projectile's movement.
         ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovementComponent"));
         ProjectileMovementComponent->SetUpdatedComponent(CollisionComponent);
-        ProjectileMovementComponent->InitialSpeed = val_InitialSpeed;
-        ProjectileMovementComponent->MaxSpeed = val_MaxSpeed;
-        ProjectileMovementComponent->bRotationFollowsVelocity = val_bRotationFollowsVelocity;
-        ProjectileMovementComponent->bShouldBounce = val_bShouldBounce;
-        ProjectileMovementComponent->Bounciness = val_Bounciness;
-        ProjectileMovementComponent->ProjectileGravityScale = val_ProjectileGravityScale;
+        ProjectileMovementComponent->InitialSpeed = InitialSpeed;
+        ProjectileMovementComponent->MaxSpeed = MaxSpeed;
+        ProjectileMovementComponent->bRotationFollowsVelocity = true;
+        ProjectileMovementComponent->bShouldBounce = bShouldBounce;
+        ProjectileMovementComponent->Bounciness = Bounciness;
+        ProjectileMovementComponent->ProjectileGravityScale = 0.1f;
     }
     if (!ProjectileMeshComponent)
     {
@@ -56,11 +67,12 @@ AFPSProjectile::AFPSProjectile()
             ProjectileMaterialInstance = UMaterialInstanceDynamic::Create(Material.Object, ProjectileMeshComponent);
         }
         ProjectileMeshComponent->SetMaterial(0, ProjectileMaterialInstance);
-        ProjectileMeshComponent->SetRelativeScale3D(FVector(0.09f, 0.09f, 0.09f));
+        ProjectileMeshComponent->SetRelativeScale3D(FVector(ProjectileScale)); //visual size of projectile
         ProjectileMeshComponent->SetupAttachment(RootComponent);
     }
     // Delete the projectile after X seconds.
-    InitialLifeSpan = val_lifespan;
+    InitialLifeSpan = 5.0f;
+    Tags.AddUnique("Projectile");
 }
 
 // Called when the game starts or when spawned
@@ -86,8 +98,18 @@ void AFPSProjectile::FireInDirection(const FVector& ShootDirection)
 // Function that is called when the projectile hits something.
 void AFPSProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit)
 {
-    if (OtherActor != this)
+    if (OtherActor && OtherActor != this)
     {
+        if (OtherActor->ActorHasTag("Player"))
+        {
+            return;
+        }
+
+        if (OtherActor->ActorHasTag("Projectile"))
+        {
+
+            return;
+        }
         //if (OtherComponent->IsSimulatingPhysics())
         {
             //OtherComponent->AddImpulseAtLocation(ProjectileMovementComponent->Velocity * 100.0f, Hit.ImpactPoint);
@@ -99,7 +121,7 @@ void AFPSProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor
 
                 AController* ProjectileInstigatorController = GetInstigatorController(); // Get the controller of the actor that fired the projectile
 
-                HitBasicEnemy->TakeDamage(10.0f, FDamageEvent(), ProjectileInstigatorController, this);
+                HitBasicEnemy->TakeDamage(Damage, FDamageEvent(), ProjectileInstigatorController, this);
                 Destroy();
 
             }

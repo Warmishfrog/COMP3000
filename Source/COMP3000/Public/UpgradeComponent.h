@@ -12,6 +12,9 @@ struct FUpgradeData: public FTableRowBase
     GENERATED_BODY()
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    int UpgradeID;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     FString Name;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -25,6 +28,9 @@ struct FUpgradeData: public FTableRowBase
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     int32 Tiers;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    float Colour;
 };
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )

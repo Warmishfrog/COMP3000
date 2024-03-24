@@ -20,6 +20,13 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 	ENGINE_API UClass* Z_Construct_UClass_ACharacter();
 	UPackage* Z_Construct_UPackage__Script_COMP3000();
 // End Cross Module References
+	DEFINE_FUNCTION(AFP_player::execApplyUpgradeEffect)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->ApplyUpgradeEffect();
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(AFP_player::execLevelUp)
 	{
 		P_FINISH;
@@ -102,6 +109,7 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 	{
 		UClass* Class = AFP_player::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
+			{ "ApplyUpgradeEffect", &AFP_player::execApplyUpgradeEffect },
 			{ "Fire", &AFP_player::execFire },
 			{ "GainXP", &AFP_player::execGainXP },
 			{ "LevelUp", &AFP_player::execLevelUp },
@@ -114,6 +122,29 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 			{ "StopJump", &AFP_player::execStopJump },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
+	}
+	struct Z_Construct_UFunction_AFP_player_ApplyUpgradeEffect_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AFP_player_ApplyUpgradeEffect_Statics::Function_MetaDataParams[] = {
+		{ "Category", "XP" },
+		{ "ModuleRelativePath", "FP_player.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AFP_player_ApplyUpgradeEffect_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AFP_player, nullptr, "ApplyUpgradeEffect", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AFP_player_ApplyUpgradeEffect_Statics::Function_MetaDataParams), Z_Construct_UFunction_AFP_player_ApplyUpgradeEffect_Statics::Function_MetaDataParams) };
+	UFunction* Z_Construct_UFunction_AFP_player_ApplyUpgradeEffect()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AFP_player_ApplyUpgradeEffect_Statics::FuncParams);
+		}
+		return ReturnFunction;
 	}
 	struct Z_Construct_UFunction_AFP_player_Fire_Statics
 	{
@@ -449,9 +480,21 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 #endif
 		static const UECodeGen_Private::FClassPropertyParams NewProp_ProjectileClass;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Seconds_MetaData[];
+#endif
+		static const UECodeGen_Private::FIntPropertyParams NewProp_Seconds;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Minutes_MetaData[];
+#endif
+		static const UECodeGen_Private::FIntPropertyParams NewProp_Minutes;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_MuzzleOffset_MetaData[];
 #endif
 		static const UECodeGen_Private::FStructPropertyParams NewProp_MuzzleOffset;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Projectile_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_Projectile;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_Health_MetaData[];
 #endif
@@ -481,6 +524,56 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_TempRow_MetaData[];
 #endif
 		static const UECodeGen_Private::FStructPropertyParams NewProp_TempRow;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_val_Damage_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_val_Damage;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_val_InitialSpeed_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_val_InitialSpeed;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_val_MaxSpeed_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_val_MaxSpeed;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_val_bShouldBounce_MetaData[];
+#endif
+		static void NewProp_val_bShouldBounce_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_val_bShouldBounce;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_val_Bounciness_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_val_Bounciness;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_val_bRotationFollowsVelocity_MetaData[];
+#endif
+		static void NewProp_val_bRotationFollowsVelocity_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_val_bRotationFollowsVelocity;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_val_ProjectileGravityScale_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_val_ProjectileGravityScale;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_val_lifespan_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_val_lifespan;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_val_ProjectileScale_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_val_ProjectileScale;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_val_CollisionSphere_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_val_CollisionSphere;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_val_ExplosionRadius_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_val_ExplosionRadius;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_val_PierceCount_MetaData[];
+#endif
+		static const UECodeGen_Private::FIntPropertyParams NewProp_val_PierceCount;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -491,6 +584,7 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::DependentSingletons) < 16);
 	const FClassFunctionLinkInfo Z_Construct_UClass_AFP_player_Statics::FuncInfo[] = {
+		{ &Z_Construct_UFunction_AFP_player_ApplyUpgradeEffect, "ApplyUpgradeEffect" }, // 4029063649
 		{ &Z_Construct_UFunction_AFP_player_Fire, "Fire" }, // 4261626434
 		{ &Z_Construct_UFunction_AFP_player_GainXP, "GainXP" }, // 4169978926
 		{ &Z_Construct_UFunction_AFP_player_LevelUp, "LevelUp" }, // 138197110
@@ -525,6 +619,26 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 #endif
 	const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_ProjectileClass = { "ProjectileClass", nullptr, (EPropertyFlags)0x0024080000010001, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, ProjectileClass), Z_Construct_UClass_UClass, Z_Construct_UClass_AFPSProjectile_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_ProjectileClass_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_ProjectileClass_MetaData) };
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_Seconds_MetaData[] = {
+		{ "Category", "FP_player" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//clock\n" },
+#endif
+		{ "ModuleRelativePath", "FP_player.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "clock" },
+#endif
+	};
+#endif
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_Seconds = { "Seconds", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, Seconds), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_Seconds_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_Seconds_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_Minutes_MetaData[] = {
+		{ "Category", "FP_player" },
+		{ "ModuleRelativePath", "FP_player.h" },
+	};
+#endif
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_Minutes = { "Minutes", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, Minutes), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_Minutes_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_Minutes_MetaData) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_MuzzleOffset_MetaData[] = {
 		{ "Category", "Gameplay" },
 #if !UE_BUILD_SHIPPING
@@ -537,6 +651,19 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 	};
 #endif
 	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_MuzzleOffset = { "MuzzleOffset", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, MuzzleOffset), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_MuzzleOffset_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_MuzzleOffset_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_Projectile_MetaData[] = {
+		{ "Category", "Projectile" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// Projectile class to spawn.\n" },
+#endif
+		{ "ModuleRelativePath", "FP_player.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Projectile class to spawn." },
+#endif
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_Projectile = { "Projectile", nullptr, (EPropertyFlags)0x0010000000010001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, Projectile), Z_Construct_UClass_AFPSProjectile_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_Projectile_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_Projectile_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_Health_MetaData[] = {
 		{ "Category", "Gameplay" },
@@ -589,13 +716,7 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_CurrentThreeUpgrades_MetaData[] = {
 		{ "Category", "FP_player" },
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "//ue5 bug for editing component \n" },
-#endif
 		{ "ModuleRelativePath", "FP_player.h" },
-#if !UE_BUILD_SHIPPING
-		{ "ToolTip", "ue5 bug for editing component" },
-#endif
 	};
 #endif
 	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_CurrentThreeUpgrades = { "CurrentThreeUpgrades", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, CurrentThreeUpgrades), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_CurrentThreeUpgrades_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_CurrentThreeUpgrades_MetaData) };
@@ -605,10 +726,111 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 		{ "ModuleRelativePath", "FP_player.h" },
 	};
 #endif
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_TempRow = { "TempRow", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, TempRow), Z_Construct_UScriptStruct_FUpgradeData, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_TempRow_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_TempRow_MetaData) }; // 2271792410
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_TempRow = { "TempRow", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, TempRow), Z_Construct_UScriptStruct_FUpgradeData, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_TempRow_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_TempRow_MetaData) }; // 4247046186
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_val_Damage_MetaData[] = {
+		{ "Category", "Projectile" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//damage variables\n" },
+#endif
+		{ "ModuleRelativePath", "FP_player.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "damage variables" },
+#endif
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_val_Damage = { "val_Damage", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, val_Damage), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_val_Damage_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_val_Damage_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_val_InitialSpeed_MetaData[] = {
+		{ "Category", "Projectile" },
+		{ "ModuleRelativePath", "FP_player.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_val_InitialSpeed = { "val_InitialSpeed", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, val_InitialSpeed), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_val_InitialSpeed_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_val_InitialSpeed_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_val_MaxSpeed_MetaData[] = {
+		{ "Category", "Projectile" },
+		{ "ModuleRelativePath", "FP_player.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_val_MaxSpeed = { "val_MaxSpeed", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, val_MaxSpeed), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_val_MaxSpeed_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_val_MaxSpeed_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_val_bShouldBounce_MetaData[] = {
+		{ "Category", "Projectile" },
+		{ "ModuleRelativePath", "FP_player.h" },
+	};
+#endif
+	void Z_Construct_UClass_AFP_player_Statics::NewProp_val_bShouldBounce_SetBit(void* Obj)
+	{
+		((AFP_player*)Obj)->val_bShouldBounce = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_val_bShouldBounce = { "val_bShouldBounce", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AFP_player), &Z_Construct_UClass_AFP_player_Statics::NewProp_val_bShouldBounce_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_val_bShouldBounce_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_val_bShouldBounce_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_val_Bounciness_MetaData[] = {
+		{ "Category", "Projectile" },
+		{ "ModuleRelativePath", "FP_player.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_val_Bounciness = { "val_Bounciness", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, val_Bounciness), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_val_Bounciness_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_val_Bounciness_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_val_bRotationFollowsVelocity_MetaData[] = {
+		{ "Category", "Projectile" },
+		{ "ModuleRelativePath", "FP_player.h" },
+	};
+#endif
+	void Z_Construct_UClass_AFP_player_Statics::NewProp_val_bRotationFollowsVelocity_SetBit(void* Obj)
+	{
+		((AFP_player*)Obj)->val_bRotationFollowsVelocity = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_val_bRotationFollowsVelocity = { "val_bRotationFollowsVelocity", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AFP_player), &Z_Construct_UClass_AFP_player_Statics::NewProp_val_bRotationFollowsVelocity_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_val_bRotationFollowsVelocity_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_val_bRotationFollowsVelocity_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_val_ProjectileGravityScale_MetaData[] = {
+		{ "Category", "Projectile" },
+		{ "ModuleRelativePath", "FP_player.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_val_ProjectileGravityScale = { "val_ProjectileGravityScale", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, val_ProjectileGravityScale), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_val_ProjectileGravityScale_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_val_ProjectileGravityScale_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_val_lifespan_MetaData[] = {
+		{ "Category", "Projectile" },
+		{ "ModuleRelativePath", "FP_player.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_val_lifespan = { "val_lifespan", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, val_lifespan), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_val_lifespan_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_val_lifespan_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_val_ProjectileScale_MetaData[] = {
+		{ "Category", "Projectile" },
+		{ "ModuleRelativePath", "FP_player.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_val_ProjectileScale = { "val_ProjectileScale", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, val_ProjectileScale), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_val_ProjectileScale_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_val_ProjectileScale_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_val_CollisionSphere_MetaData[] = {
+		{ "Category", "Projectile" },
+		{ "ModuleRelativePath", "FP_player.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_val_CollisionSphere = { "val_CollisionSphere", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, val_CollisionSphere), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_val_CollisionSphere_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_val_CollisionSphere_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_val_ExplosionRadius_MetaData[] = {
+		{ "Category", "Projectile" },
+		{ "ModuleRelativePath", "FP_player.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_val_ExplosionRadius = { "val_ExplosionRadius", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, val_ExplosionRadius), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_val_ExplosionRadius_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_val_ExplosionRadius_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_val_PierceCount_MetaData[] = {
+		{ "Category", "Projectile" },
+		{ "ModuleRelativePath", "FP_player.h" },
+	};
+#endif
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_val_PierceCount = { "val_PierceCount", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, val_PierceCount), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_val_PierceCount_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_val_PierceCount_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AFP_player_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_ProjectileClass,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_Seconds,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_Minutes,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_MuzzleOffset,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_Projectile,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_Health,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_XP,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_XPToLevel,
@@ -617,6 +839,18 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_CurrentThreeUpgrades_Inner,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_CurrentThreeUpgrades,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_TempRow,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_val_Damage,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_val_InitialSpeed,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_val_MaxSpeed,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_val_bShouldBounce,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_val_Bounciness,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_val_bRotationFollowsVelocity,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_val_ProjectileGravityScale,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_val_lifespan,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_val_ProjectileScale,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_val_CollisionSphere,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_val_ExplosionRadius,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_val_PierceCount,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AFP_player_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AFP_player>::IsAbstract,
@@ -656,9 +890,9 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_FP_player_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AFP_player, AFP_player::StaticClass, TEXT("AFP_player"), &Z_Registration_Info_UClass_AFP_player, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFP_player), 3460663092U) },
+		{ Z_Construct_UClass_AFP_player, AFP_player::StaticClass, TEXT("AFP_player"), &Z_Registration_Info_UClass_AFP_player, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFP_player), 2728481232U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_FP_player_h_3517571229(TEXT("/Script/COMP3000"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_FP_player_h_3094889972(TEXT("/Script/COMP3000"),
 		Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_FP_player_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_FP_player_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

@@ -53,6 +53,12 @@ public:
 		UFUNCTION()
 		void StopJump();
 
+	//clock
+		UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int Seconds;
+		UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int Minutes;
+
 
 	//shooting
 	
@@ -72,6 +78,10 @@ public:
 		// Gun muzzle offset from the camera location.
 		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
 		FVector MuzzleOffset;
+
+		// Projectile class to spawn.
+		UPROPERTY(EditDefaultsOnly, Category = Projectile)
+		AFPSProjectile* Projectile;
 
 		bool CanFire = true;
 		float FireRate = 0.25f;
@@ -103,9 +113,11 @@ public:
 		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "XP")
 			int Level = 0;
 
+		UFUNCTION(BlueprintCallable, Category = "XP")
+		void ApplyUpgradeEffect();
 			
 		UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-		class UUpgradeComponent* PlayerUpgradeComponent; //ue5 bug for editing component 
+		class UUpgradeComponent* PlayerUpgradeComponent;
 		
 
 		UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -114,4 +126,47 @@ public:
 
 		UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		FUpgradeData TempRow;
+
+	//Projectile Variables
+
+		//damage variables
+		
+		UPROPERTY(EditAnywhere, Category = Projectile)
+		float val_Damage = 10.0f;
+
+		UPROPERTY(EditAnywhere, Category = Projectile)
+		float val_InitialSpeed = 1000.0f;
+
+		UPROPERTY(EditAnywhere, Category = Projectile)
+		float val_MaxSpeed = 3000.0f;
+
+		UPROPERTY(EditAnywhere, Category = Projectile)
+		bool val_bShouldBounce = false;
+
+		UPROPERTY(EditAnywhere, Category = Projectile)
+		float val_Bounciness = 0.1f;
+
+		UPROPERTY(EditAnywhere, Category = Projectile)
+		bool val_bRotationFollowsVelocity = true;
+
+		UPROPERTY(EditAnywhere, Category = Projectile)
+		float val_ProjectileGravityScale = 0.1f;
+
+		UPROPERTY(EditAnywhere, Category = Projectile)
+		float val_lifespan = 5.0f;
+
+		UPROPERTY(EditAnywhere, Category = Projectile)
+		float val_ProjectileScale = 0.09f;
+		
+		UPROPERTY(EditAnywhere, Category = Projectile)
+		float val_CollisionSphere= 15.0f;
+
+		UPROPERTY(EditAnywhere, Category = Projectile)
+		float val_ExplosionRadius = 0.0f;
+
+		UPROPERTY(EditAnywhere, Category = Projectile)
+		int val_PierceCount = 0;
+
+	//Upgrade Variables
+		float XPModifier = 1.0f;
 };

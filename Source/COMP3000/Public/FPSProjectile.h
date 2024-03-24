@@ -15,11 +15,40 @@ class COMP3000_API AFPSProjectile : public AActor
 	
 public:	
 	// Sets default values for this actor's properties
-	AFPSProjectile();
+	AFPSProjectile(/*
+		const FObjectInitializer& ObjectInitializer, 
+		float Damage,
+		float CollisionRadius,
+		float ProjectileScale,
+		float InitialSpeed,
+		float MaxSpeed,
+		float LifeSpan,
+		bool bShouldBounce,
+		float Bounciness,
+		float ExplosionRadius,
+		int PierceCount
+		/**/
+	);
+
+	float Damage = 10.0f;
+	float CollisionRadius = 15.0f;
+	float ProjectileScale = 0.09f;
+	float InitialSpeed = 1000.0f;
+	float MaxSpeed = 3000.0f;
+	float LifeSpan = 5.0f;
+	bool bShouldBounce = true;
+	float Bounciness = 0.1f;
+	float ExplosionRadius = 0.0f;
+	int PierceCount = 0;
+
+
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+
+
 
 public:	
 	// Called every frame
@@ -47,20 +76,5 @@ public:
 	// Function that is called when the projectile hits something.
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
-
-	UPROPERTY(EditAnywhere, Category = Projectile)
-	float val_InitialSpeed = 1000.0f;
-	UPROPERTY(EditAnywhere, Category = Projectile)
-	float val_MaxSpeed = 3000.0f;
-	UPROPERTY(EditAnywhere, Category = Projectile)
-	bool val_bRotationFollowsVelocity = true;
-	UPROPERTY(EditAnywhere, Category = Projectile)
-	bool val_bShouldBounce = false;
-	UPROPERTY(EditAnywhere, Category = Projectile)
-	float val_Bounciness = 0.1f;
-	UPROPERTY(EditAnywhere, Category = Projectile)
-	float val_ProjectileGravityScale = .1f;
-	UPROPERTY(EditAnywhere, Category = Projectile)
-	float val_lifespan = 5.0f;
 
 };
