@@ -130,14 +130,14 @@ void AFP_player::MoveForward(float Value)
 {
 	// Find out which way is "forward" and record that the player wants to move that way.
 	FVector Direction = FRotationMatrix(Controller->GetControlRotation()).GetScaledAxis(EAxis::X);
-	AddMovementInput(Direction, Value);
+	AddMovementInput(Direction, Value * MovementSpeedModifier);
 }
 
 void AFP_player::MoveRight(float Value)
 {
 	// Find out which way is "right" and record that the player wants to move that way.
 	FVector Direction = FRotationMatrix(Controller->GetControlRotation()).GetScaledAxis(EAxis::Y);
-	AddMovementInput(Direction, Value);
+	AddMovementInput(Direction, Value * MovementSpeedModifier);
 }
 
 void AFP_player::StartJump()
@@ -185,19 +185,15 @@ void AFP_player::Fire()
                     MuzzleLocation, 
                     MuzzleRotation, 
                     SpawnParams 
-                    /*
-                    val_Damage,
-                    val_CollisionSphere,
-                    val_ProjectileScale,
-                    val_InitialSpeed,
-                    val_MaxSpeed,
-                    val_lifespan,
-                    val_bShouldBounce,
-                    val_Bounciness,
-                    val_ExplosionRadius,
-                    val_PierceCount
-                    /**/
                 );
+
+                Projectile->ProjectileMovementComponent->bShouldBounce = val_bShouldBounce;
+                Projectile->ProjectileMovementComponent->Bounciness = val_Bounciness;
+                Projectile->ProjectileMovementComponent->InitialSpeed = val_InitialSpeed;
+                Projectile->ProjectileMovementComponent->MaxSpeed = val_MaxSpeed;
+                Projectile->ProjectileMovementComponent->ProjectileGravityScale = val_ProjectileGravityScale;
+                Projectile->CollisionComponent->InitSphereRadius(val_CollisionSphere);
+                Projectile->ProjectileMeshComponent->SetRelativeScale3D(FVector(val_ProjectileScale));
                 if (Projectile)
                 {
                     //initial trajectory.
@@ -213,15 +209,22 @@ void AFP_player::Fire()
                             // Offset the position of the extra projectiles slightly
                             //FVector Offset = FVector::RightVector * (i + 1) * 50.0f; // Adjust the offset as needed
                             //math random for y offset
-                            float RandomYOffset = FMath::RandRange(-25.0f, 25.0f);
-                            float RandomZOffset = FMath::RandRange(-25.0f, 25.0f);
+                            float RandomYOffset = FMath::RandRange(-30.0f, 30.0f);
+                            float RandomZOffset = FMath::RandRange(-30.0f, 30.0f);
                             MuzzleOffset.Set(125.0f, RandomYOffset, RandomZOffset); // x,y,z
                             MuzzleLocation = CameraLocation + FTransform(CameraRotation).TransformVector(MuzzleOffset);
 
                             AFPSProjectile* ExtraProjectile = World->SpawnActor<AFPSProjectile>(ProjectileClass, MuzzleLocation, MuzzleRotation, SpawnParams);
+
                             if (ExtraProjectile)
                             {
-                                // Initial trajectory for the extra projectile
+                                ExtraProjectile->ProjectileMovementComponent->bShouldBounce = val_bShouldBounce;
+                                ExtraProjectile->ProjectileMovementComponent->Bounciness = val_Bounciness;
+                                ExtraProjectile->ProjectileMovementComponent->InitialSpeed = val_InitialSpeed;
+                                ExtraProjectile->ProjectileMovementComponent->MaxSpeed = val_MaxSpeed;
+                                ExtraProjectile->ProjectileMovementComponent->ProjectileGravityScale = val_ProjectileGravityScale;
+                                ExtraProjectile->CollisionComponent->InitSphereRadius(val_CollisionSphere);
+                                ExtraProjectile->ProjectileMeshComponent->SetRelativeScale3D(FVector(val_ProjectileScale));
                                 ExtraProjectile->FireInDirection(LaunchDirection);
                             }
                         }
@@ -305,34 +308,33 @@ void AFP_player::ApplyUpgradeEffect()
         break;
 
     case 2://  Larger Projectile
-        val_CollisionSphere += 3.0f;
-        Projectile->CollisionComponent->InitSphereRadius(15.0f);
-        val_ProjectileScale += 0.018f;
-        Projectile->ProjectileMeshComponent->SetRelativeScale3D(FVector(val_ProjectileScale)); //visual size of projectile
+        val_CollisionSphere += 3.0f; //collision size of projectile
+        val_ProjectileScale += 0.027f; //visual size of projectile
         break;
 
     case 3://  Faster Projectile
-        Projectile->ProjectileMovementComponent->InitialSpeed += 300.0f;
-        Projectile->ProjectileMovementComponent->MaxSpeed += 300.0f;
+        val_InitialSpeed += 300.0f;
+        val_MaxSpeed += 300.0f;
         break;
 
     case 4://  Bouncing Projectile
-        Projectile->ProjectileMovementComponent->bShouldBounce = true;
-        Projectile->ProjectileMovementComponent->Bounciness += 1.0f;
+        val_bShouldBounce = true;
+        val_ProjectileGravityScale = 1.0f;
+        val_Bounciness += 0.1f;
         break;
 
     case 5://  Exploding Projectile
         break;
 
     case 6://  Extra Projectile
-        val_ProjectileScale -= 0.01f;
-        Projectile->ProjectileMeshComponent->SetRelativeScale3D(FVector(val_ProjectileScale)); //visual size of projectile
+        val_ProjectileScale -= 0.02f; //visual size of projectile
+        val_Damage -= 2.5f;
 
         //code is in the Fire function
         break;
 
     case 7://  More Damage
-        Projectile->Damage += 5.0f;
+        val_Damage += 5.0f;
         break;
 
     case 8://  Damage Over Time
@@ -343,7 +345,17 @@ void AFP_player::ApplyUpgradeEffect()
         break;
 
     case 10://  Super Rare
+
         break;
+
+    case 11://  Speed Boost
+        MovementSpeedModifier += 0.1f;
+		break;
+
+    case 12: //  Restore Health
+        Health = 100;
+		break;
+
 
     default:
         // Unknown Upgrade

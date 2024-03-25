@@ -144,7 +144,7 @@ public:
 		bool val_bShouldBounce = false;
 
 		UPROPERTY(EditAnywhere, Category = Projectile)
-		float val_Bounciness = 0.1f;
+		float val_Bounciness = 0.3f;
 
 		UPROPERTY(EditAnywhere, Category = Projectile)
 		bool val_bRotationFollowsVelocity = true;
@@ -169,4 +169,5 @@ public:
 
 	//Upgrade Variables
 		float XPModifier = 1.0f;
+		float MovementSpeedModifier = 1.0f;
 };
