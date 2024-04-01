@@ -73,6 +73,12 @@ public:
 	FChunkPosition Current;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Chunk Position")
 	FChunkPosition Visible;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Chunk Position")
+	FName ChunkFolderPath;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Chunk Position")
+	int ChunkCount;
 	
 	UPROPERTY(EditAnywhere, Category = "Chunk Position")
 	TSet<FChunkPosition> Generated;

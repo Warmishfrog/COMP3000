@@ -4,20 +4,7 @@
 #include "Engine/DamageEvents.h"
 
 // Sets default values
-AFPSProjectile::AFPSProjectile(/*
-    const FObjectInitializer& ObjectInitializer,
-    float Damage,
-    float CollisionRadius,
-    float ProjectileScale,
-    float InitialSpeed,
-    float MaxSpeed,
-    float LifeSpan,
-    bool bShouldBounce,
-    float Bounciness,
-    float ExplosionRadius,
-    int PierceCount
-    /**/
-)//: AActor(ObjectInitializer)
+AFPSProjectile::AFPSProjectile()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -71,7 +58,7 @@ AFPSProjectile::AFPSProjectile(/*
         ProjectileMeshComponent->SetupAttachment(RootComponent);
     }
     // Delete the projectile after X seconds.
-    InitialLifeSpan = 5.0f;
+    InitialLifeSpan = LifeSpan;
     Tags.AddUnique("Projectile");
 }
 

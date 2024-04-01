@@ -32,38 +32,48 @@ void ABasicEnemy::BeginPlay()
 {
 	Super::BeginPlay();
 
+	
 	AController* EnemyController = GetController();
 	if (GetController() != nullptr)
 	{
 		// The enemy already has a controller
 		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Enemy already has a controller! REMAPPING"));
-		BasicEnemyAIController = Cast<ABasicEnemyAIController>(EnemyController);
+		BasicEnemyAIController = Cast<ABasicEnemyAIController>(EnemyController); //crashes without this line
 	}
 	else
 	{
 		// The enemy doesn't have a controller yet
-		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Enemy doesn't have a controller! ASSIGNING"));
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Enemy doesn't have a controller! ASSIGNING"));
 		ABasicEnemyAIController* Casted = GetWorld()->SpawnActor<ABasicEnemyAIController>(ABasicEnemyAIController::StaticClass());
 		if (Casted)
 		{
 			BasicEnemyAIController = Casted;
-			//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Successfully spawned AI controller finally"));
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Successfully spawned AI controller finally"));
 		}
 	}
-	BasicEnemyAIController->GetPathFollowingComponent()->OnRequestFinished.AddUObject(this, &ABasicEnemy::OnAIMoveCompleted);
+	if (BasicEnemyAIController)
+	{
+		BasicEnemyAIController->GetPathFollowingComponent()->OnRequestFinished.AddUObject(this, &ABasicEnemy::OnAIMoveCompleted);
+	}
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("BasicEnemyAIController is NULL"));
+	}
+	/**/
 	
-	PlayerCollisionDetection->OnComponentBeginOverlap.AddDynamic(this,
-		&ABasicEnemy::OnPlayerDetectedOverlapBegin);
+	//Collision Component Setup
+		PlayerCollisionDetection->OnComponentBeginOverlap.AddDynamic(this,
+			&ABasicEnemy::OnPlayerDetectedOverlapBegin);
+		PlayerAttackCollisionDetection->OnComponentBeginOverlap.AddDynamic(this,
+			&ABasicEnemy::OnPlayerAttackOverlapBegin);
+		PlayerAttackCollisionDetection->OnComponentEndOverlap.AddDynamic(this,
+			&ABasicEnemy::OnPlayerAttackOverlapEnd);
+		DamageCollision->OnComponentBeginOverlap.AddDynamic(this,
+			&ABasicEnemy::OnDealDamageOverlapBegin);
 
-	PlayerAttackCollisionDetection->OnComponentBeginOverlap.AddDynamic(this,
-		&ABasicEnemy::OnPlayerAttackOverlapBegin);
-
-	PlayerAttackCollisionDetection->OnComponentEndOverlap.AddDynamic(this,
-		&ABasicEnemy::OnPlayerAttackOverlapEnd);
-
-	DamageCollision->OnComponentBeginOverlap.AddDynamic(this,
-		&ABasicEnemy::OnDealDamageOverlapBegin);
+		InitialLifeSpan = 60.0f;
 }
+
 void ABasicEnemy::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
@@ -82,7 +92,7 @@ void ABasicEnemy::OnAIMoveCompleted(FAIRequestID RequestID, const FPathFollowing
 	}
 	if (!PlayerDetected)
 	{
-		BasicEnemyAIController->RandomPatrol();
+		Destroy();
 	}
 }
 
@@ -131,7 +141,7 @@ void ABasicEnemy::OnPlayerDetectedOverlapEnd(UPrimitiveComponent* OverlappedComp
 	{
 		PlayerDetected = false;
 		StopSeekingPlayer();
-		BasicEnemyAIController->RandomPatrol();
+		Destroy();
 	}
 }
 

@@ -2,7 +2,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Camera/CameraComponent.h"
 #include "FPSProjectile.h"
+#include "Components/StaticMeshComponent.h"
+#include "HandMesh.h"
 #include "TimerManager.h"
 #include "UpgradeComponent.h"
 #include "FP_player.generated.h"
@@ -20,6 +23,10 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = Projectile)
 	TSubclassOf<class AFPSProjectile> ProjectileClass;
 
+	UPROPERTY(EditDefaultsOnly, Category = "POVCamera")
+	TSubclassOf<class AHandMesh> HandClass; // Class of the gun mesh to attach
+
+
 	FTimerHandle  FireRateTimerHandle;
 	FTimerHandle  AutoFireRateTimerHandle;
 
@@ -34,6 +41,18 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	//Camera
+
+		//  mesh instance
+		UPROPERTY(EditDefaultsOnly, Category = "POVCamera")
+		AHandMesh* POVMesh;
+
+		//  mesh offset and rotation
+		UPROPERTY(EditDefaultsOnly, Category = "POVCamera")
+		FVector POVMeshOffset;
+		UPROPERTY(EditDefaultsOnly, Category = "POVCamera")
+		FRotator POVMeshRotation;
 
 
 	//Movement
@@ -53,11 +72,14 @@ public:
 		UFUNCTION()
 		void StopJump();
 
-	//clock
+	//gameplay
 		UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int Seconds;
 		UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int Minutes;
+
+		UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		bool bChoiceMade;
 
 
 	//shooting
@@ -90,9 +112,15 @@ public:
 
 	//health
 		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
-		float  Health = 100;
+		float  CurrentHealth = 0;
+
+		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Gameplay)
+		float  MaxHealth = 100;
 
 		float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+
+		UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
+		void DEATH(); //for blueprint //ignore
 
 	//XP
 		UFUNCTION(BlueprintCallable, Category = "XP")
@@ -153,7 +181,7 @@ public:
 		float val_ProjectileGravityScale = 0.1f;
 
 		UPROPERTY(EditAnywhere, Category = Projectile)
-		float val_lifespan = 5.0f;
+		float val_lifespan = 1.0f;
 
 		UPROPERTY(EditAnywhere, Category = Projectile)
 		float val_ProjectileScale = 0.09f;

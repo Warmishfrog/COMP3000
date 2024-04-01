@@ -112,6 +112,7 @@
     <None Include="..\..\.vsconfig"/>
     <None Include="..\..\COMP3000.png"/>
     <None Include="..\..\Config\DefaultEditor.ini"/>
+    <None Include="..\..\Config\DefaultEngine.ini"/>
     <None Include="..\..\Config\DefaultGame.ini"/>
     <None Include="..\..\Config\DefaultInput.ini"/>
     <None Include="..\..\Source\COMP3000\COMP3000.Build.cs"/>
@@ -168,6 +169,11 @@
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles)</ForcedIncludeFiles>
       <AdditionalOptions>$(ClCompile_AdditionalOptions)</AdditionalOptions>
     </ClCompile>
+    <ClCompile Include="..\..\Source\COMP3000\Private\HandMesh.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles)</ForcedIncludeFiles>
+      <AdditionalOptions>$(ClCompile_AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
     <ClCompile Include="..\..\Source\COMP3000\Private\LandscapeGen.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles)</ForcedIncludeFiles>
@@ -185,6 +191,7 @@
     <ClInclude Include="..\..\Source\COMP3000\Public\FindPlayerPosition.h"/>
     <ClInclude Include="..\..\Source\COMP3000\Public\FPSProjectile.h"/>
     <ClInclude Include="..\..\Source\COMP3000\Public\FP_player_cpp.h"/>
+    <ClInclude Include="..\..\Source\COMP3000\Public\HandMesh.h"/>
     <ClInclude Include="..\..\Source\COMP3000\Public\LandscapeGen.h"/>
     <ClInclude Include="..\..\Source\COMP3000\Public\UpgradeComponent.h"/>
   </ItemGroup>

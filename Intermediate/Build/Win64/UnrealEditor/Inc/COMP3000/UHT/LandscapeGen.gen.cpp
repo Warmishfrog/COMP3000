@@ -154,6 +154,14 @@ template<> COMP3000_API UScriptStruct* StaticStruct<FChunkPosition>()
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_Visible_MetaData[];
 #endif
 		static const UECodeGen_Private::FStructPropertyParams NewProp_Visible;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_ChunkFolderPath_MetaData[];
+#endif
+		static const UECodeGen_Private::FNamePropertyParams NewProp_ChunkFolderPath;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_ChunkCount_MetaData[];
+#endif
+		static const UECodeGen_Private::FIntPropertyParams NewProp_ChunkCount;
 		static const UECodeGen_Private::FStructPropertyParams NewProp_Generated_ElementProp;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_Generated_MetaData[];
@@ -270,6 +278,20 @@ template<> COMP3000_API UScriptStruct* StaticStruct<FChunkPosition>()
 	};
 #endif
 	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Visible = { "Visible", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ALandscapeGen, Visible), Z_Construct_UScriptStruct_FChunkPosition, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Visible_MetaData), Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Visible_MetaData) }; // 1490250955
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ALandscapeGen_Statics::NewProp_ChunkFolderPath_MetaData[] = {
+		{ "Category", "Chunk Position" },
+		{ "ModuleRelativePath", "Public/LandscapeGen.h" },
+	};
+#endif
+	const UECodeGen_Private::FNamePropertyParams Z_Construct_UClass_ALandscapeGen_Statics::NewProp_ChunkFolderPath = { "ChunkFolderPath", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Name, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ALandscapeGen, ChunkFolderPath), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ALandscapeGen_Statics::NewProp_ChunkFolderPath_MetaData), Z_Construct_UClass_ALandscapeGen_Statics::NewProp_ChunkFolderPath_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ALandscapeGen_Statics::NewProp_ChunkCount_MetaData[] = {
+		{ "Category", "Chunk Position" },
+		{ "ModuleRelativePath", "Public/LandscapeGen.h" },
+	};
+#endif
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_ALandscapeGen_Statics::NewProp_ChunkCount = { "ChunkCount", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ALandscapeGen, ChunkCount), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ALandscapeGen_Statics::NewProp_ChunkCount_MetaData), Z_Construct_UClass_ALandscapeGen_Statics::NewProp_ChunkCount_MetaData) };
 	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Generated_ElementProp = { "Generated", nullptr, (EPropertyFlags)0x0000000000000001, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FChunkPosition, METADATA_PARAMS(0, nullptr) }; // 1490250955
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Generated_MetaData[] = {
@@ -291,6 +313,8 @@ template<> COMP3000_API UScriptStruct* StaticStruct<FChunkPosition>()
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Material,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Current,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Visible,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALandscapeGen_Statics::NewProp_ChunkFolderPath,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALandscapeGen_Statics::NewProp_ChunkCount,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Generated_ElementProp,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALandscapeGen_Statics::NewProp_Generated,
 	};
@@ -336,9 +360,9 @@ template<> COMP3000_API UScriptStruct* StaticStruct<FChunkPosition>()
 		{ FChunkPosition::StaticStruct, Z_Construct_UScriptStruct_FChunkPosition_Statics::NewStructOps, TEXT("ChunkPosition"), &Z_Registration_Info_UScriptStruct_ChunkPosition, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FChunkPosition), 1490250955U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_Public_LandscapeGen_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_ALandscapeGen, ALandscapeGen::StaticClass, TEXT("ALandscapeGen"), &Z_Registration_Info_UClass_ALandscapeGen, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ALandscapeGen), 665681313U) },
+		{ Z_Construct_UClass_ALandscapeGen, ALandscapeGen::StaticClass, TEXT("ALandscapeGen"), &Z_Registration_Info_UClass_ALandscapeGen, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ALandscapeGen), 337622848U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_Public_LandscapeGen_h_3694840848(TEXT("/Script/COMP3000"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_Public_LandscapeGen_h_2712827115(TEXT("/Script/COMP3000"),
 		Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_Public_LandscapeGen_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_Public_LandscapeGen_h_Statics::ClassInfo),
 		Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_Public_LandscapeGen_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_Public_LandscapeGen_h_Statics::ScriptStructInfo),
 		nullptr, 0);

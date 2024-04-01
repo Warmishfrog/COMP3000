@@ -18,6 +18,7 @@ void ALandscapeGen::BeginPlay()
 
     // debug for beginplay
     //GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("ALandscapeGen BeginPlay"));
+    ChunkFolderPath = FName(TEXT("Chunk Folder"));
 }
 
 void ALandscapeGen::Tick(float DeltaTime)
@@ -31,6 +32,8 @@ void ALandscapeGen::Tick(float DeltaTime)
 
     Current.X = FMath::RoundToInt((PlayerLocation.X)/VertexDistance);
     Current.Y = FMath::RoundToInt((PlayerLocation.Y)/VertexDistance); 
+
+
 
     for (int X = -Distance; X <= Distance; X++)
     {
@@ -46,6 +49,12 @@ void ALandscapeGen::Tick(float DeltaTime)
                 FVector Vector = FVector((Visible.X * VertexDistance), (Visible.Y * VertexDistance), 0);
                 //UE_LOG(LogTemp, Warning, TEXT("Vector: %s"), *Vector.ToString());
                 ADiamondSquare* DiamondSquareActor = GetWorld()->SpawnActor<ADiamondSquare>(ADiamondSquare::StaticClass(), Vector, FRotator::ZeroRotator, SpawnParams);
+
+                DiamondSquareActor->SetFolderPath(ChunkFolderPath);
+                // Set a name for the spawned actor
+                FString ActorName = FString::Printf(TEXT("Chunk_%d (%d %d)"), ChunkCount, Visible.X, Visible.Y);
+                DiamondSquareActor->SetActorLabel(*ActorName);
+
                 
                 //Setting Parameters
                 XOffset = Size * Visible.X;
@@ -55,6 +64,7 @@ void ALandscapeGen::Tick(float DeltaTime)
                     
                 //DiamondSquareActor->AttachToActor(this, FAttachmentTransformRules::SnapToTargetIncludingScale);
                 Generated.Add(FChunkPosition(Visible));
+                ChunkCount++;
 
             }            
         }

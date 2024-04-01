@@ -20,9 +20,27 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "Spawn")
 		TSubclassOf<class ABasicEnemy> EnemyToSpawn;
 
-	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = "true"), Category = "Spawn")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Spawn")
 		bool CombatStarted = false;
 
-	float EnemySpawnTimer;
-	float EnemySpawnIncrease;
+
+	void SpawnEnemy();
+	float SpawningRate(float t);
+
+	//spawn parameters
+		UPROPERTY(EditAnywhere, Category = "Spawn")
+		float CumulativeSpawnTime = 0.0f;  // Cumulative time
+
+		UPROPERTY(EditAnywhere, Category = "Spawn")
+		float MaxSpawnRate = 120.0f;  // Maximum spawning rate
+
+		UPROPERTY(EditAnywhere, Category = "Spawn")
+		float GrowthRate = 0.6f;    // Growth rate parameter
+
+		UPROPERTY(EditAnywhere, Category = "Spawn")
+		float SpawnAccelerate = 4.0f;   // Time at which the spawning rate starts to accelerate
+
+		UPROPERTY(EditAnywhere, Category = "Spawn")
+		float BaseSpawnRate = 10.0f;   // Base spawning rate
+
 };

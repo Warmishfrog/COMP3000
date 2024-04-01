@@ -14,20 +14,7 @@ class COMP3000_API AFPSProjectile : public AActor
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
-	AFPSProjectile(/*
-		const FObjectInitializer& ObjectInitializer, 
-		float Damage,
-		float CollisionRadius,
-		float ProjectileScale,
-		float InitialSpeed,
-		float MaxSpeed,
-		float LifeSpan,
-		bool bShouldBounce,
-		float Bounciness,
-		float ExplosionRadius,
-		int PierceCount
-		/**/
+	AFPSProjectile(
 	);
 
 	float Damage = 10.0f;
@@ -35,7 +22,7 @@ public:
 	float ProjectileScale = 0.09f;
 	float InitialSpeed = 1000.0f;
 	float MaxSpeed = 3000.0f;
-	float LifeSpan = 5.0f;
+	float LifeSpan = 1.0f;
 	bool bShouldBounce = true;
 	float Bounciness = 0.1f;
 	float ExplosionRadius = 0.0f;
@@ -46,7 +33,6 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
 
 
 

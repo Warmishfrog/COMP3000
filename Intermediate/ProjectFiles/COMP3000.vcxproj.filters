@@ -19,6 +19,9 @@
     <None Include="..\..\Config\DefaultEditor.ini">
       <Filter>Config</Filter>
     </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
     <None Include="..\..\Config\DefaultGame.ini">
       <Filter>Config</Filter>
     </None>
@@ -73,6 +76,9 @@
     <ClCompile Include="..\..\Source\COMP3000\Private\FP_player_cpp.cpp">
       <Filter>Source\COMP3000\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\COMP3000\Private\HandMesh.cpp">
+      <Filter>Source\COMP3000\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\COMP3000\Private\LandscapeGen.cpp">
       <Filter>Source\COMP3000\Private</Filter>
     </ClCompile>
@@ -101,6 +107,9 @@
       <Filter>Source\COMP3000\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\COMP3000\Public\FP_player_cpp.h">
+      <Filter>Source\COMP3000\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\COMP3000\Public\HandMesh.h">
       <Filter>Source\COMP3000\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\COMP3000\Public\LandscapeGen.h">

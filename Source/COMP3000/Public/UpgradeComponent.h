@@ -30,7 +30,7 @@ struct FUpgradeData: public FTableRowBase
     int32 Tiers;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    float Colour;
+    FColor Colour;
 };
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )

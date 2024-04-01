@@ -28,9 +28,32 @@ AFP_player::AFP_player() //constructor //initialises during editor time
     Tags.AddUnique("Player");
 }
 
+
 void AFP_player::BeginPlay() //initialises during runtime
 {
 	Super::BeginPlay();
+
+    /*
+    FVector CameraLocation;
+    FRotator CameraRotation;
+    GetActorEyesViewPoint(CameraLocation, CameraRotation);
+    POVMesh = GetWorld()->SpawnActor<AHandMesh>(AHandMesh::StaticClass(), CameraLocation, CameraRotation);
+
+
+    if (POVMesh)
+    {
+        GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, TEXT("Hand Mesh Spawned!"));
+        POVMesh->SetMobility(EComponentMobility::Movable);
+        POVMesh->SetActorScale3D(FVector(1.0f));
+        POVMesh->SetActorRelativeLocation(POVMeshOffset);
+        POVMesh->SetActorRelativeRotation(POVMeshRotation);
+
+    }
+    else
+    {
+		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("Hand Mesh Spawn Failed!"));
+	}
+    */
 
     PlayerUpgradeComponent = NewObject<UUpgradeComponent>(this, UUpgradeComponent::StaticClass(), TEXT("Player Upgrades C++"), RF_NoFlags);
     PlayerUpgradeComponent->RegisterComponent(); // add component to player
@@ -54,7 +77,8 @@ void AFP_player::BeginPlay() //initialises during runtime
     }
 
     //starting player stats
-    Health = 100;
+    CurrentHealth = 100;
+    MaxHealth = 100;
     XP = 0;
     XPToLevel = 3.0f;
     Level = 0;
@@ -192,6 +216,7 @@ void AFP_player::Fire()
                 Projectile->ProjectileMovementComponent->InitialSpeed = val_InitialSpeed;
                 Projectile->ProjectileMovementComponent->MaxSpeed = val_MaxSpeed;
                 Projectile->ProjectileMovementComponent->ProjectileGravityScale = val_ProjectileGravityScale;
+                Projectile->InitialLifeSpan = val_lifespan;
                 Projectile->CollisionComponent->InitSphereRadius(val_CollisionSphere);
                 Projectile->ProjectileMeshComponent->SetRelativeScale3D(FVector(val_ProjectileScale));
                 if (Projectile)
@@ -247,14 +272,15 @@ float AFP_player::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent
 {
     float DamageCaused = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
     
-    DamageCaused =  FMath::Min(Health, DamageCaused);
-	Health -= DamageCaused;
+    DamageCaused =  FMath::Min(CurrentHealth, DamageCaused);
+    CurrentHealth -= DamageCaused;
     //UE_LOG(LogTemp, Log, TEXT("Damage amount: %f"), DamageAmount);
-    GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, TEXT("Player is taking damage"));
-    if (Health <= 0)
+    //GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, TEXT("Player is taking damage"));
+    if (CurrentHealth <= 0)
     {
-        GEngine->AddOnScreenDebugMessage(-1, 99.f, FColor::Red, TEXT("Player is DEAD"));
-        UGameplayStatics::OpenLevel(GetWorld(), FName("Menu")); //temp fix //change this later to be more smooth
+        // GEngine->AddOnScreenDebugMessage(-1, 99.f, FColor::Red, TEXT("Player is DEAD"));
+        //UGameplayStatics::OpenLevel(GetWorld(), FName("Menu")); //temp fix //change this later to be more smooth
+        DEATH(); //event trigger for blueprint
 	}
     return 0.0f;
 }
@@ -319,8 +345,9 @@ void AFP_player::ApplyUpgradeEffect()
 
     case 4://  Bouncing Projectile
         val_bShouldBounce = true;
-        val_ProjectileGravityScale = 1.0f;
-        val_Bounciness += 0.1f;
+        val_ProjectileGravityScale = 0.8f;
+        val_Bounciness += 0.2f;
+        val_lifespan += 1.0f;
         break;
 
     case 5://  Exploding Projectile
@@ -328,7 +355,7 @@ void AFP_player::ApplyUpgradeEffect()
 
     case 6://  Extra Projectile
         val_ProjectileScale -= 0.02f; //visual size of projectile
-        val_Damage -= 2.5f;
+        val_Damage -= 5.0f;
 
         //code is in the Fire function
         break;
@@ -345,7 +372,8 @@ void AFP_player::ApplyUpgradeEffect()
         break;
 
     case 10://  Super Rare
-
+        XPModifier += 5.0f;
+        MovementSpeedModifier += 0.5f;
         break;
 
     case 11://  Speed Boost
@@ -353,9 +381,20 @@ void AFP_player::ApplyUpgradeEffect()
 		break;
 
     case 12: //  Restore Health
-        Health = 100;
+        CurrentHealth = MaxHealth;
 		break;
 
+    case 13: // Longer Range
+        val_lifespan += 1.0f;
+        break;
+
+    case 14: // Increase max health
+        MaxHealth += 10.0f;
+        CurrentHealth = MaxHealth;
+		break;
+    case 15: //Overhealth
+        CurrentHealth = MaxHealth * 1.5;
+        break;
 
     default:
         // Unknown Upgrade
