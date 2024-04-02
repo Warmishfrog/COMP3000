@@ -20,7 +20,7 @@ void ANewGameModeBase::BeginPlay()
 
 	CombatStarted = false; //debug
 
-	ABasicEnemyAIController* EnemyAIController = GetWorld()->SpawnActor<ABasicEnemyAIController>(ABasicEnemyAIController::StaticClass(), FTransform::Identity);
+	//ABasicEnemyAIController* EnemyAIController = GetWorld()->SpawnActor<ABasicEnemyAIController>(ABasicEnemyAIController::StaticClass(), FTransform::Identity);
 
     check(GEngine != nullptr);
 }
@@ -90,7 +90,5 @@ void ANewGameModeBase::SpawnEnemy()
 		FActorSpawnParameters SpawnParams;
 
 		ABasicEnemy* SpawnEnemyActor = World->SpawnActor<ABasicEnemy>(EnemyToSpawn, SpawnLocation, FRotator::ZeroRotator, SpawnParams);
-		//EnemySpawnIncrease -= 0.0075;
-
 	}
 }

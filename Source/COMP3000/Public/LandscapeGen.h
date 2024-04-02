@@ -60,6 +60,12 @@ public:
 	UPROPERTY(EditAnywhere, Meta = (CLampMin = 0))
 	float YOffset = 0.0f;
 
+	UPROPERTY(EditAnywhere, Meta = (CLampMin = 0))
+	float RandomXOffset;
+
+	UPROPERTY(EditAnywhere, Meta = (CLampMin = 0))
+	float RandomYOffset;
+
 	//Material and Vertices Scaling
 	UPROPERTY(EditAnywhere, Meta = (CLampMin = 0.000001))
 	float VertexDistance = 100.0f;
@@ -82,6 +88,8 @@ public:
 	
 	UPROPERTY(EditAnywhere, Category = "Chunk Position")
 	TSet<FChunkPosition> Generated;
+
+
 
 	virtual void Tick(float DeltaTime) override;
 

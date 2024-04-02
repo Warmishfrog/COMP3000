@@ -27,7 +27,7 @@ void UUpgradeComponent::AddUpgrade(const FString& UpgradeName, int32 UpgradeKey)
 		int32* TierPtr = UnlockedUpgrades.Find(UpgradeName);
 		if (TierPtr)
 		{
-			*TierPtr += 1;
+			*TierPtr += UpgradeKey;
             //ue log for upgrade name and tier
             UE_LOG(LogTemp, Warning, TEXT("Upgrade %s is now at tier %d"), *UpgradeName, *TierPtr);
 		}

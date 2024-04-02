@@ -140,7 +140,7 @@ void AFP_player::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 void AFP_player::StartFiring()
 {
     bIsFiring = true;
-    GetWorldTimerManager().SetTimer(AutoFireRateTimerHandle, this, &AFP_player::Fire, FireRate, true);
+    GetWorldTimerManager().SetTimer(AutoFireRateTimerHandle, this, &AFP_player::Fire, FMath::Max(FireRate, 0.001f), true);
     Fire(); // Initial shot when button is pressed
 }
 
@@ -210,15 +210,21 @@ void AFP_player::Fire()
                     MuzzleRotation, 
                     SpawnParams 
                 );
-
+                
                 Projectile->ProjectileMovementComponent->bShouldBounce = val_bShouldBounce;
                 Projectile->ProjectileMovementComponent->Bounciness = val_Bounciness;
-                Projectile->ProjectileMovementComponent->InitialSpeed = val_InitialSpeed;
-                Projectile->ProjectileMovementComponent->MaxSpeed = val_MaxSpeed;
+                Projectile->ProjectileMovementComponent->InitialSpeed = FMath::Max(val_InitialSpeed, 10.0f);
+                Projectile->ProjectileMovementComponent->MaxSpeed = FMath::Max(val_MaxSpeed, 10.0f);
                 Projectile->ProjectileMovementComponent->ProjectileGravityScale = val_ProjectileGravityScale;
-                Projectile->InitialLifeSpan = val_lifespan;
+                Projectile->Damage = FMath::Max(val_Damage, 0.1f);
+                Projectile->InitialLifeSpan = FMath::Max(val_lifespan,0.1f);
                 Projectile->CollisionComponent->InitSphereRadius(val_CollisionSphere);
-                Projectile->ProjectileMeshComponent->SetRelativeScale3D(FVector(val_ProjectileScale));
+                Projectile->ProjectileMeshComponent->SetRelativeScale3D(FVector(FMath::Max(val_ProjectileScale,0.001)));
+                /**/
+                
+                UGameplayStatics::PlaySoundAtLocation(GetWorld(), ShootingSFX, MuzzleLocation);
+
+
                 if (Projectile)
                 {
                     //initial trajectory.
@@ -245,11 +251,12 @@ void AFP_player::Fire()
                             {
                                 ExtraProjectile->ProjectileMovementComponent->bShouldBounce = val_bShouldBounce;
                                 ExtraProjectile->ProjectileMovementComponent->Bounciness = val_Bounciness;
-                                ExtraProjectile->ProjectileMovementComponent->InitialSpeed = val_InitialSpeed;
-                                ExtraProjectile->ProjectileMovementComponent->MaxSpeed = val_MaxSpeed;
+                                ExtraProjectile->ProjectileMovementComponent->InitialSpeed = FMath::Max(val_InitialSpeed, 10.0f);
+                                ExtraProjectile->ProjectileMovementComponent->MaxSpeed = FMath::Max(val_MaxSpeed, 10.0f);
                                 ExtraProjectile->ProjectileMovementComponent->ProjectileGravityScale = val_ProjectileGravityScale;
+                                //ExtraProjectile->Damage = FMath::Max(val_Damage, 0.1f);
                                 ExtraProjectile->CollisionComponent->InitSphereRadius(val_CollisionSphere);
-                                ExtraProjectile->ProjectileMeshComponent->SetRelativeScale3D(FVector(val_ProjectileScale));
+                                ExtraProjectile->ProjectileMeshComponent->SetRelativeScale3D(FVector(FMath::Max(val_ProjectileScale, 0.001)));
                                 ExtraProjectile->FireInDirection(LaunchDirection);
                             }
                         }
@@ -257,7 +264,7 @@ void AFP_player::Fire()
                 }
 
                 CanFire = false; // start of cooldown period
-                GetWorldTimerManager().SetTimer(FireRateTimerHandle, this, &AFP_player::ResetCanFire, FireRate, false);
+                GetWorldTimerManager().SetTimer(FireRateTimerHandle, this, &AFP_player::ResetCanFire, FMath::Max(FireRate, 0.001f) , false);
             }
         }
     }
@@ -301,6 +308,7 @@ void AFP_player::LevelUp()
     Level++;
     XP -= XPToLevel;
     XPToLevel *= 1.5f;
+    StopFiring();
     if (PlayerUpgradeComponent)
     {
         CurrentThreeUpgrades = PlayerUpgradeComponent->FindThreeUpgrades();
@@ -355,13 +363,13 @@ void AFP_player::ApplyUpgradeEffect()
 
     case 6://  Extra Projectile
         val_ProjectileScale -= 0.02f; //visual size of projectile
-        val_Damage -= 5.0f;
+        val_Damage -= 2.5f;
 
         //code is in the Fire function
         break;
 
     case 7://  More Damage
-        val_Damage += 5.0f;
+        val_Damage += 2.5f;
         break;
 
     case 8://  Damage Over Time
@@ -393,7 +401,39 @@ void AFP_player::ApplyUpgradeEffect()
         CurrentHealth = MaxHealth;
 		break;
     case 15: //Overhealth
-        CurrentHealth = MaxHealth * 1.5;
+        CurrentHealth += MaxHealth;
+        break;
+
+    case 16: //  Spreadshot
+        for (int32 i = 0; i < 5; ++i) 
+        {
+            PlayerUpgradeComponent->AddUpgrade("extra_projectile", 1);
+        }
+        val_ProjectileScale -= 0.04f; //visual size of projectile
+        val_CollisionSphere -= 6.0f; //collision size of projectile
+        val_Damage -= 9.0f;
+        val_lifespan -= 2.0f;
+        break;
+
+    case 17: //longshot
+        val_lifespan += 3.0f;
+        val_InitialSpeed += 900.0f;
+        val_MaxSpeed += 900.0f;
+        val_ProjectileScale -= 0.02f; //visual size of projectile
+        val_CollisionSphere -= 3.0f; //collision size of projectile
+		break;
+
+    case 18: //minigun
+        FireRate -= 0.15f;
+        val_Damage -= 9.0f;
+		break;
+
+    case 19:// bulkshot
+        val_CollisionSphere += 5.0f; //collision size of projectile
+        val_ProjectileScale += 0.07f; //visual size of projectile
+        val_Damage += 7.0f;
+        val_lifespan -= 1.0f;
+        FireRate += 0.25f;
         break;
 
     default:

@@ -71,7 +71,7 @@ void ABasicEnemy::BeginPlay()
 		DamageCollision->OnComponentBeginOverlap.AddDynamic(this,
 			&ABasicEnemy::OnDealDamageOverlapBegin);
 
-		InitialLifeSpan = 60.0f;
+		InitialLifeSpan = 30.0f;
 }
 
 void ABasicEnemy::Tick(float DeltaTime)

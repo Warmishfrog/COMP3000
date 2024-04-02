@@ -19,6 +19,9 @@ void ALandscapeGen::BeginPlay()
     // debug for beginplay
     //GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("ALandscapeGen BeginPlay"));
     ChunkFolderPath = FName(TEXT("Chunk Folder"));
+
+    RandomXOffset = FMath::RandRange(0.0f, 10000.0f); // Adjust the range as needed
+    RandomYOffset = FMath::RandRange(0.0f, 10000.0f); // Adjust the range as needed
 }
 
 void ALandscapeGen::Tick(float DeltaTime)
@@ -57,8 +60,8 @@ void ALandscapeGen::Tick(float DeltaTime)
 
                 
                 //Setting Parameters
-                XOffset = Size * Visible.X;
-                YOffset = Size * Visible.Y;
+                XOffset = Size * Visible.X + RandomXOffset;
+                YOffset = Size * Visible.Y + RandomYOffset;
                 DiamondSquareActor->SetChunkParameters(Size, ZMultiplier, NoiseScale, VertexDistance / Size, UVScale, XOffset, YOffset);
                 DiamondSquareActor->SetMaterial(Material);
                     

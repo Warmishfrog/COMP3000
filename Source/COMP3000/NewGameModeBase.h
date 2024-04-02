@@ -32,7 +32,7 @@ public:
 		float CumulativeSpawnTime = 0.0f;  // Cumulative time
 
 		UPROPERTY(EditAnywhere, Category = "Spawn")
-		float MaxSpawnRate = 120.0f;  // Maximum spawning rate
+		float MaxSpawnRate = 60.0f;  // Maximum spawning rate
 
 		UPROPERTY(EditAnywhere, Category = "Spawn")
 		float GrowthRate = 0.6f;    // Growth rate parameter

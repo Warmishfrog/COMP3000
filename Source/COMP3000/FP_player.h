@@ -8,6 +8,7 @@
 #include "HandMesh.h"
 #include "TimerManager.h"
 #include "UpgradeComponent.h"
+#include "Sound/SoundCue.h"
 #include "FP_player.generated.h"
 
 UCLASS()
@@ -81,6 +82,11 @@ public:
 		UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool bChoiceMade;
 
+		UPROPERTY(EditDefaultsOnly, Category = "Audio")
+		USoundCue* ShootingSFX;
+		UPROPERTY(EditDefaultsOnly, Category = "Audio")
+		USoundCue* MovingSFX;
+
 
 	//shooting
 	
@@ -106,7 +112,9 @@ public:
 		AFPSProjectile* Projectile;
 
 		bool CanFire = true;
-		float FireRate = 0.25f;
+		UPROPERTY(EditAnywhere, Category = Projectile, meta = (ClampMin = "0.001"))
+			float FireRate = 0.4f;
+
 		bool bIsFiring= false;
 	
 
@@ -159,13 +167,13 @@ public:
 
 		//damage variables
 		
-		UPROPERTY(EditAnywhere, Category = Projectile)
+		UPROPERTY(EditAnywhere, Category = Projectile, meta = (ClampMin = "0.1"))
 		float val_Damage = 10.0f;
 
-		UPROPERTY(EditAnywhere, Category = Projectile)
+		UPROPERTY(EditAnywhere, Category = Projectile, meta = (ClampMin = "10.0"))
 		float val_InitialSpeed = 1000.0f;
 
-		UPROPERTY(EditAnywhere, Category = Projectile)
+		UPROPERTY(EditAnywhere, Category = Projectile, meta = (ClampMin = "10.0"))
 		float val_MaxSpeed = 3000.0f;
 
 		UPROPERTY(EditAnywhere, Category = Projectile)
@@ -180,10 +188,11 @@ public:
 		UPROPERTY(EditAnywhere, Category = Projectile)
 		float val_ProjectileGravityScale = 0.1f;
 
-		UPROPERTY(EditAnywhere, Category = Projectile)
+		UPROPERTY(EditAnywhere, Category = Projectile, meta = (ClampMin = "0.1"))
+
 		float val_lifespan = 1.0f;
 
-		UPROPERTY(EditAnywhere, Category = Projectile)
+		UPROPERTY(EditAnywhere, Category = Projectile, meta = (ClampMin = "0.001"))
 		float val_ProjectileScale = 0.09f;
 		
 		UPROPERTY(EditAnywhere, Category = Projectile)
