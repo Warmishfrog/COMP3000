@@ -139,9 +139,11 @@ void ABasicEnemy::OnPlayerDetectedOverlapEnd(UPrimitiveComponent* OverlappedComp
 {
 	if (OtherActor == UGameplayStatics::GetPlayerCharacter(GetWorld(), 0))
 	{
+		UE_LOG(LogTemp, Log, TEXT("Enemy left bounds"));
 		PlayerDetected = false;
 		StopSeekingPlayer();
 		Destroy();
+
 	}
 }
 

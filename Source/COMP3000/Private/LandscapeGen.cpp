@@ -18,10 +18,10 @@ void ALandscapeGen::BeginPlay()
 
     // debug for beginplay
     //GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("ALandscapeGen BeginPlay"));
-    ChunkFolderPath = FName(TEXT("Chunk Folder"));
+    ChunkFolderPath = FName(TEXT("Chunk Folder")); //debug for condensing actors
 
     RandomXOffset = FMath::RandRange(0.0f, 10000.0f); // Adjust the range as needed
-    RandomYOffset = FMath::RandRange(0.0f, 10000.0f); // Adjust the range as needed
+    RandomYOffset = FMath::RandRange(0.0f, 10000.0f);
 }
 
 void ALandscapeGen::Tick(float DeltaTime)
@@ -31,7 +31,7 @@ void ALandscapeGen::Tick(float DeltaTime)
     // Get the player location
     FVector PlayerLocation = UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetPawn()->GetActorLocation();
 
-    FVector SpawnLocation(Current.X, Current.Y, 0.0f);
+   // FVector SpawnLocation(Current.X, Current.Y, 0.0f); //check if this is needed
 
     Current.X = FMath::RoundToInt((PlayerLocation.X)/VertexDistance);
     Current.Y = FMath::RoundToInt((PlayerLocation.Y)/VertexDistance); 
@@ -44,7 +44,7 @@ void ALandscapeGen::Tick(float DeltaTime)
         {            
             Visible.X = (Current.X + X);
             Visible.Y = (Current.Y + Y);
-            bool GenVis = Generated.Contains(FChunkPosition(Visible));
+            bool GenVis = Generated.Contains(FChunkPosition(Visible)); // if it already exists
             
             if (!GenVis) 
             {
@@ -53,11 +53,12 @@ void ALandscapeGen::Tick(float DeltaTime)
                 //UE_LOG(LogTemp, Warning, TEXT("Vector: %s"), *Vector.ToString());
                 ADiamondSquare* DiamondSquareActor = GetWorld()->SpawnActor<ADiamondSquare>(ADiamondSquare::StaticClass(), Vector, FRotator::ZeroRotator, SpawnParams);
 
+                /*
                 DiamondSquareActor->SetFolderPath(ChunkFolderPath);
                 // Set a name for the spawned actor
                 FString ActorName = FString::Printf(TEXT("Chunk_%d (%d %d)"), ChunkCount, Visible.X, Visible.Y);
                 DiamondSquareActor->SetActorLabel(*ActorName);
-
+                /**/
                 
                 //Setting Parameters
                 XOffset = Size * Visible.X + RandomXOffset;
@@ -67,7 +68,7 @@ void ALandscapeGen::Tick(float DeltaTime)
                     
                 //DiamondSquareActor->AttachToActor(this, FAttachmentTransformRules::SnapToTargetIncludingScale);
                 Generated.Add(FChunkPosition(Visible));
-                ChunkCount++;
+                ChunkCount++; //debug
 
             }            
         }

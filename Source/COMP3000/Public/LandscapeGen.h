@@ -18,17 +18,19 @@ struct FChunkPosition
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 Y;
 
+
+	//set values to 0 by default
 	FChunkPosition()
 		: X(0)
 		, Y(0)
 	{}	
-	// Define the equality operator (==)
+	// Define the equality operator (==) so i can compare other FChunkPositions
 	bool operator==(const FChunkPosition& Other) const
 	{
 		return X == Other.X && Y == Other.Y;
 	}
 
-	// Define ValueTypeHash for FChunkPosition
+	// Define ValueTypeHash for FChunkPosition //needed for TSet and Tmap to work //pain in ass
 	friend uint32 GetTypeHash(const FChunkPosition& ChunkPosition)
 	{
 		return HashCombine(GetTypeHash(ChunkPosition.X), GetTypeHash(ChunkPosition.Y));

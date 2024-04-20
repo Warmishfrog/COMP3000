@@ -11,6 +11,7 @@
 #include "Sound/SoundCue.h"
 #include "FP_player.generated.h"
 
+
 UCLASS()
 class COMP3000_API AFP_player : public ACharacter
 {
@@ -26,7 +27,6 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "POVCamera")
 	TSubclassOf<class AHandMesh> HandClass; // Class of the gun mesh to attach
-
 
 	FTimerHandle  FireRateTimerHandle;
 	FTimerHandle  AutoFireRateTimerHandle;
@@ -82,10 +82,18 @@ public:
 		UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool bChoiceMade;
 
+		UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float FOV = 90.0f;
+
+	//Audio
 		UPROPERTY(EditDefaultsOnly, Category = "Audio")
 		USoundCue* ShootingSFX;
 		UPROPERTY(EditDefaultsOnly, Category = "Audio")
 		USoundCue* MovingSFX;
+		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Audio")
+		float SFXVolume = 1.0f;
+		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Audio")
+		float MusicVolume = 1.0f;
 
 
 	//shooting
@@ -162,6 +170,9 @@ public:
 
 		UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		FUpgradeData TempRow;
+
+		UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int ChosenUpgrade = 0;
 
 	//Projectile Variables
 

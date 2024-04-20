@@ -39,9 +39,9 @@ void ANewGameModeBase::Tick(float DeltaTime)
 
 		if (EnemySpawnTimer <= 0.0f)
 		{
-			//GEngine->AddOnScreenDebugMessage(-1, 120.0f, FColor::Yellow, FString::Printf(TEXT("Cumulative Time: %f"), CumulativeSpawnTime));
-			//GEngine->AddOnScreenDebugMessage(-1, 120.0f, FColor::Yellow, FString::Printf(TEXT("Spawning Rate: %f"), SpawningRate(CumulativeSpawnTime))); 
-			//GEngine->AddOnScreenDebugMessage(-1, 120.0f, FColor::Yellow, FString::Printf(TEXT("Spawn Rate: %f"), spawnRate));
+			//GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, FString::Printf(TEXT("Cumulative Time: %f"), CumulativeSpawnTime));
+			//GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, FString::Printf(TEXT("Spawning Rate: %f"), SpawningRate(CumulativeSpawnTime))); 
+			//GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::Yellow, FString::Printf(TEXT("Spawn Rate: %f"), spawnRate));
 			EnemySpawnTimer = spawnRate;
 			SpawnEnemy();
 		}			
@@ -65,30 +65,20 @@ void ANewGameModeBase::SpawnEnemy()
 		float DistanceLimitHigh = 5000.0f;
 		float DistanceLimitLow = 1000.0f;
 
-		float randomDistanceX = FMath::RandRange(DistanceLimitLow, DistanceLimitHigh);
-		float randomDistanceY = FMath::RandRange(DistanceLimitLow, DistanceLimitHigh); //sqrt(pow((FMath::RandRange(DistanceLimitLow, DistanceLimitHigh)), 2) - pow(randomDistanceX, 2));
+		// Generate a random angle direction in radians
+		float RandomAngle = FMath::RandRange(0.0f, 2 * PI); //360 degrees
 
-		int Quadrant = FMath::RandRange(1, 4);
-		switch (Quadrant)
-		{
-		case 2:
-			randomDistanceX = -randomDistanceX;
-			break;
+		// Calculate the random distance from the player
+		float RandomDistance = FMath::RandRange(DistanceLimitLow, DistanceLimitHigh);
+		FVector SpawnLocation = PlayerLocation + FVector(FMath::Cos(RandomAngle), FMath::Sin(RandomAngle), 0) * RandomDistance;
 
-		case 3:
-			randomDistanceX = -randomDistanceX;
-			randomDistanceY = -randomDistanceY;
-			break;
-
-		case 4:
-			randomDistanceY = -randomDistanceY;
-			break;
-		}
-
-		FVector SpawnLocation(PlayerLocation.X + randomDistanceX, PlayerLocation.Y + randomDistanceY, PlayerLocation.Z + 100);
-		//GEngine->AddOnScreenDebugMessage(-1, 120.0f, FColor::Yellow, FString::Printf(TEXT("X: %f, Y: %f"), SpawnLocation.X, SpawnLocation.Y));
 		FActorSpawnParameters SpawnParams;
 
 		ABasicEnemy* SpawnEnemyActor = World->SpawnActor<ABasicEnemy>(EnemyToSpawn, SpawnLocation, FRotator::ZeroRotator, SpawnParams);
+		if (SpawnEnemyActor)
+		{
+			SpawnEnemyActor->EnemyHealth = 30.0f + FMath::RoundToInt(CumulativeSpawnTime) / 5;
+		}
+
 	}
 }

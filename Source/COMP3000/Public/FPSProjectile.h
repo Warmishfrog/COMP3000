@@ -14,18 +14,30 @@ class COMP3000_API AFPSProjectile : public AActor
 	GENERATED_BODY()
 	
 public:	
-	AFPSProjectile(
-	);
+	AFPSProjectile();
 
+	UPROPERTY(EditAnywhere, Category = "Projectile")
 	float Damage = 10.0f;
+	UPROPERTY(EditAnywhere, Category = "Projectile")
 	float CollisionRadius = 15.0f;
+	UPROPERTY(EditAnywhere, Category = "Projectile")
 	float ProjectileScale = 0.09f;
+	UPROPERTY(EditAnywhere, Category = "Projectile")
 	float InitialSpeed = 1000.0f;
+	UPROPERTY(EditAnywhere, Category = "Projectile")
 	float MaxSpeed = 3000.0f;
+	
+	
+	UPROPERTY (EditAnywhere, Category = "Projectile")
 	float LifeSpan = 1.0f;
+	/**/
+	UPROPERTY(EditAnywhere, Category = "Projectile")
 	bool bShouldBounce = true;
+	UPROPERTY(EditAnywhere, Category = "Projectile")
 	float Bounciness = 0.1f;
+	UPROPERTY(EditAnywhere, Category = "Projectile")
 	float ExplosionRadius = 0.0f;
+	UPROPERTY(EditAnywhere, Category = "Projectile")
 	int PierceCount = 0;
 
 

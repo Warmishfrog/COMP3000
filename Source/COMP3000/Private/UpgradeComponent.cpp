@@ -66,6 +66,8 @@ TArray<FName> UUpgradeComponent::FindThreeUpgrades()
         int32 NumRows = RowNames.Num();
         if (NumRows > 0)
         {
+            // Create a copy of RowNames to track available upgrades
+            TArray<FName> AvailableRowNames = RowNames;
             // Calculate total rarity of all upgrades
             float TotalRarity = 0.0f;
             for (const FName& RowName : RowNames)
@@ -76,8 +78,7 @@ TArray<FName> UUpgradeComponent::FindThreeUpgrades()
                     TotalRarity += RowData->Rarity;
                 }
             }
-
-            // Pick three upgrades
+            // three upgrades
             for (int32 i = 0; i < 3; i++)
             {
                 // Generate a random value between 0 and total rarity
@@ -85,16 +86,26 @@ TArray<FName> UUpgradeComponent::FindThreeUpgrades()
 
                 // Iterate through the upgrades to find the selected upgrade
                 float CumulativeRarity = 0.0f;
-                for (const FName& RowName : RowNames)
+                for (int32 j = 0; j < AvailableRowNames.Num(); j++)
                 {
+                    FName RowName = AvailableRowNames[j];
                     FUpgradeData* RowData = UpgradeDataTable->FindRow<FUpgradeData>(RowName, TEXT(""));
                     if (RowData)
                     {
                         CumulativeRarity += RowData->Rarity;
                         if (RandomRarity <= CumulativeRarity)
                         {
+                            //print percentage chance of upgrade
+                            UE_LOG(LogTemp, Warning, TEXT("Chance of %s: %f%%"), *RowName.ToString(), (RowData->Rarity / TotalRarity) * 100);
+
                             // Found the selected upgrade
                             SelectedUpgradeRowName.Add(RowName);
+
+                            // Remove the selected upgrade from the available upgrades
+                            AvailableRowNames.RemoveAt(j);
+
+                            // Update total rarity after removing the selected upgrade
+                            TotalRarity -= RowData->Rarity;
                             break;
                         }
                     }

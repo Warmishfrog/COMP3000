@@ -3,11 +3,10 @@
 #include <BasicEnemy.h>
 #include "Engine/DamageEvents.h"
 
-// Sets default values
 AFPSProjectile::AFPSProjectile()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
 
     if (!RootComponent)
     {
@@ -16,21 +15,16 @@ AFPSProjectile::AFPSProjectile()
 
     if (!CollisionComponent)
     {
-        // Use a sphere as a simple collision representation.
         CollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent"));
-        // Set the sphere's collision profile name to "Projectile".
         CollisionComponent->BodyInstance.SetCollisionProfileName(TEXT("Projectile"));
-        // Event called when component hits something.
-        CollisionComponent->OnComponentHit.AddDynamic(this, &AFPSProjectile::OnHit);
-        // Set the sphere's collision radius.
-        CollisionComponent->InitSphereRadius(CollisionRadius);
-        // Set the root component to be the collision component.
+        CollisionComponent->OnComponentHit.AddDynamic(this, &AFPSProjectile::OnHit); //hit
+        CollisionComponent->InitSphereRadius(CollisionRadius); //collision radius
         RootComponent = CollisionComponent;
     }
 
     if (!ProjectileMovementComponent)
     {
-        // Use this component to drive this projectile's movement.
+        //movement manipulation
         ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovementComponent"));
         ProjectileMovementComponent->SetUpdatedComponent(CollisionComponent);
         ProjectileMovementComponent->InitialSpeed = InitialSpeed;
@@ -57,8 +51,7 @@ AFPSProjectile::AFPSProjectile()
         ProjectileMeshComponent->SetRelativeScale3D(FVector(ProjectileScale)); //visual size of projectile
         ProjectileMeshComponent->SetupAttachment(RootComponent);
     }
-    // Delete the projectile after X seconds.
-    InitialLifeSpan = LifeSpan;
+    
     Tags.AddUnique("Projectile");
 }
 

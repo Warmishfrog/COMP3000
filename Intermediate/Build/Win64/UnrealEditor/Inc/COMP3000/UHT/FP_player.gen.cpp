@@ -539,6 +539,10 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 		static void NewProp_bChoiceMade_SetBit(void* Obj);
 		static const UECodeGen_Private::FBoolPropertyParams NewProp_bChoiceMade;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_FOV_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_FOV;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_ShootingSFX_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_ShootingSFX;
@@ -546,6 +550,14 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_MovingSFX_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_MovingSFX;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_SFXVolume_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_SFXVolume;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_MusicVolume_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_MusicVolume;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_MuzzleOffset_MetaData[];
 #endif
@@ -591,6 +603,10 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_TempRow_MetaData[];
 #endif
 		static const UECodeGen_Private::FStructPropertyParams NewProp_TempRow;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_ChosenUpgrade_MetaData[];
+#endif
+		static const UECodeGen_Private::FIntPropertyParams NewProp_ChosenUpgrade;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_val_Damage_MetaData[];
 #endif
@@ -758,9 +774,22 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 	}
 	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_bChoiceMade = { "bChoiceMade", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AFP_player), &Z_Construct_UClass_AFP_player_Statics::NewProp_bChoiceMade_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_bChoiceMade_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_bChoiceMade_MetaData) };
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_FOV_MetaData[] = {
+		{ "Category", "FP_player" },
+		{ "ModuleRelativePath", "FP_player.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_FOV = { "FOV", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, FOV), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_FOV_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_FOV_MetaData) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_ShootingSFX_MetaData[] = {
 		{ "Category", "Audio" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//Audio\n" },
+#endif
 		{ "ModuleRelativePath", "FP_player.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Audio" },
+#endif
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_ShootingSFX = { "ShootingSFX", nullptr, (EPropertyFlags)0x0010000000010001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, ShootingSFX), Z_Construct_UClass_USoundCue_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_ShootingSFX_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_ShootingSFX_MetaData) };
@@ -771,6 +800,20 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_MovingSFX = { "MovingSFX", nullptr, (EPropertyFlags)0x0010000000010001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, MovingSFX), Z_Construct_UClass_USoundCue_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_MovingSFX_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_MovingSFX_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_SFXVolume_MetaData[] = {
+		{ "Category", "Audio" },
+		{ "ModuleRelativePath", "FP_player.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_SFXVolume = { "SFXVolume", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, SFXVolume), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_SFXVolume_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_SFXVolume_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_MusicVolume_MetaData[] = {
+		{ "Category", "Audio" },
+		{ "ModuleRelativePath", "FP_player.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_MusicVolume = { "MusicVolume", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, MusicVolume), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_MusicVolume_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_MusicVolume_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_MuzzleOffset_MetaData[] = {
 		{ "Category", "Gameplay" },
@@ -875,6 +918,13 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 	};
 #endif
 	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_TempRow = { "TempRow", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, TempRow), Z_Construct_UScriptStruct_FUpgradeData, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_TempRow_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_TempRow_MetaData) }; // 2846280346
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_ChosenUpgrade_MetaData[] = {
+		{ "Category", "FP_player" },
+		{ "ModuleRelativePath", "FP_player.h" },
+	};
+#endif
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_AFP_player_Statics::NewProp_ChosenUpgrade = { "ChosenUpgrade", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFP_player, ChosenUpgrade), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AFP_player_Statics::NewProp_ChosenUpgrade_MetaData), Z_Construct_UClass_AFP_player_Statics::NewProp_ChosenUpgrade_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AFP_player_Statics::NewProp_val_Damage_MetaData[] = {
 		{ "Category", "Projectile" },
@@ -987,8 +1037,11 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_Seconds,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_Minutes,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_bChoiceMade,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_FOV,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_ShootingSFX,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_MovingSFX,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_SFXVolume,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_MusicVolume,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_MuzzleOffset,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_Projectile,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_FireRate,
@@ -1001,6 +1054,7 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_CurrentThreeUpgrades_Inner,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_CurrentThreeUpgrades,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_TempRow,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_ChosenUpgrade,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_val_Damage,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_val_InitialSpeed,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFP_player_Statics::NewProp_val_MaxSpeed,
@@ -1052,9 +1106,9 @@ void EmptyLinkFunctionForGeneratedCodeFP_player() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_FP_player_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AFP_player, AFP_player::StaticClass, TEXT("AFP_player"), &Z_Registration_Info_UClass_AFP_player, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFP_player), 2201257798U) },
+		{ Z_Construct_UClass_AFP_player, AFP_player::StaticClass, TEXT("AFP_player"), &Z_Registration_Info_UClass_AFP_player, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFP_player), 129795622U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_FP_player_h_2199767627(TEXT("/Script/COMP3000"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_FP_player_h_328906862(TEXT("/Script/COMP3000"),
 		Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_FP_player_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_FP_player_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
