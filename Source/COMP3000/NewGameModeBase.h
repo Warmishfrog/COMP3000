@@ -43,4 +43,10 @@ public:
 		UPROPERTY(EditAnywhere, Category = "Spawn")
 		float BaseSpawnRate = 10.0f;   // Base spawning rate
 
+		UPROPERTY(EditAnywhere, Category = "Spawn")
+		int NumSpawnedEnemies = 0;   // Number of spawned enemies
+
+		UPROPERTY(EditAnywhere, Category = "Spawn")
+		int MaxSpawnedEnemies = 25;   // Maximum number of enemies that can be spawned
+
 };

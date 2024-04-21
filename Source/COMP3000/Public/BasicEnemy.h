@@ -25,7 +25,7 @@ public:
 	bool PlayerDetected;
 	bool CanAttackPlayer;
 
-	
+
 	UPROPERTY(BlueprintReadWrite)
 	bool CanDealDamage;
 

@@ -17,6 +17,7 @@ void ANewGameModeBase::BeginPlay()
 {
     Super::BeginPlay();
 
+	NumSpawnedEnemies = 0;
 
 	CombatStarted = false; //debug
 
@@ -63,7 +64,7 @@ void ANewGameModeBase::SpawnEnemy()
 		FVector PlayerLocation = UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetPawn()->GetActorLocation();
 
 		float DistanceLimitHigh = 5000.0f;
-		float DistanceLimitLow = 1000.0f;
+		float DistanceLimitLow = 2000.0f;
 
 		// Generate a random angle direction in radians
 		float RandomAngle = FMath::RandRange(0.0f, 2 * PI); //360 degrees
@@ -79,6 +80,7 @@ void ANewGameModeBase::SpawnEnemy()
 		{
 			SpawnEnemyActor->EnemyHealth = 30.0f + FMath::RoundToInt(CumulativeSpawnTime) / 5;
 		}
+		NumSpawnedEnemies++;
 
 	}
 }

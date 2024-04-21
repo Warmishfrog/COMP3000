@@ -59,6 +59,14 @@ void EmptyLinkFunctionForGeneratedCodeNewGameModeBase() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_BaseSpawnRate_MetaData[];
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_BaseSpawnRate;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_NumSpawnedEnemies_MetaData[];
+#endif
+		static const UECodeGen_Private::FIntPropertyParams NewProp_NumSpawnedEnemies;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_MaxSpawnedEnemies_MetaData[];
+#endif
+		static const UECodeGen_Private::FIntPropertyParams NewProp_MaxSpawnedEnemies;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -162,6 +170,32 @@ void EmptyLinkFunctionForGeneratedCodeNewGameModeBase() {}
 	};
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ANewGameModeBase_Statics::NewProp_BaseSpawnRate = { "BaseSpawnRate", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANewGameModeBase, BaseSpawnRate), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANewGameModeBase_Statics::NewProp_BaseSpawnRate_MetaData), Z_Construct_UClass_ANewGameModeBase_Statics::NewProp_BaseSpawnRate_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANewGameModeBase_Statics::NewProp_NumSpawnedEnemies_MetaData[] = {
+		{ "Category", "Spawn" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// Base spawning rate\n" },
+#endif
+		{ "ModuleRelativePath", "NewGameModeBase.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Base spawning rate" },
+#endif
+	};
+#endif
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_ANewGameModeBase_Statics::NewProp_NumSpawnedEnemies = { "NumSpawnedEnemies", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANewGameModeBase, NumSpawnedEnemies), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANewGameModeBase_Statics::NewProp_NumSpawnedEnemies_MetaData), Z_Construct_UClass_ANewGameModeBase_Statics::NewProp_NumSpawnedEnemies_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ANewGameModeBase_Statics::NewProp_MaxSpawnedEnemies_MetaData[] = {
+		{ "Category", "Spawn" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// Number of spawned enemies\n" },
+#endif
+		{ "ModuleRelativePath", "NewGameModeBase.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Number of spawned enemies" },
+#endif
+	};
+#endif
+	const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_ANewGameModeBase_Statics::NewProp_MaxSpawnedEnemies = { "MaxSpawnedEnemies", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ANewGameModeBase, MaxSpawnedEnemies), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ANewGameModeBase_Statics::NewProp_MaxSpawnedEnemies_MetaData), Z_Construct_UClass_ANewGameModeBase_Statics::NewProp_MaxSpawnedEnemies_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ANewGameModeBase_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANewGameModeBase_Statics::NewProp_EnemyToSpawn,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANewGameModeBase_Statics::NewProp_CombatStarted,
@@ -170,6 +204,8 @@ void EmptyLinkFunctionForGeneratedCodeNewGameModeBase() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANewGameModeBase_Statics::NewProp_GrowthRate,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANewGameModeBase_Statics::NewProp_SpawnAccelerate,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANewGameModeBase_Statics::NewProp_BaseSpawnRate,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANewGameModeBase_Statics::NewProp_NumSpawnedEnemies,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ANewGameModeBase_Statics::NewProp_MaxSpawnedEnemies,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ANewGameModeBase_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<ANewGameModeBase>::IsAbstract,
@@ -209,9 +245,9 @@ void EmptyLinkFunctionForGeneratedCodeNewGameModeBase() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_NewGameModeBase_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_ANewGameModeBase, ANewGameModeBase::StaticClass, TEXT("ANewGameModeBase"), &Z_Registration_Info_UClass_ANewGameModeBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANewGameModeBase), 1797642322U) },
+		{ Z_Construct_UClass_ANewGameModeBase, ANewGameModeBase::StaticClass, TEXT("ANewGameModeBase"), &Z_Registration_Info_UClass_ANewGameModeBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANewGameModeBase), 3842469126U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_NewGameModeBase_h_2368624163(TEXT("/Script/COMP3000"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_NewGameModeBase_h_2956722021(TEXT("/Script/COMP3000"),
 		Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_NewGameModeBase_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_COMP3000_Source_COMP3000_NewGameModeBase_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
